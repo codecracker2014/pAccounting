@@ -8,7 +8,9 @@
 	  <script src = "./lib/angular/angular-route.min.js"></script>
 	  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
   <script src="./lib/bootstrap/js/jquery.min.js"></script>
+  <script src="./lib/pounchDB/pouchdb-5.2.0.min.js"></script>
   <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+
    </head>
 
    <body>
@@ -34,7 +36,7 @@
         <li>
           <a href="#activeTodo">Active todo</a>
         </li>
-        <li><a href="#">Status</a></li>
+        <li><a href="#status">Status</a></li>
         <li><a href="#config">Config</a></li>
       </ul>
     </div>
@@ -62,7 +64,7 @@
   <br><center>
 
   <button type="button" class="btn btn-primary" ng-click="todos.save()">Save</button>
-  <button type="button" class="btn btn-primary" ng-click="todos.getData()">Save</button>
+  <button type="button" class="btn btn-primary" ng-click="todos.getData()">get</button>
 </center>
   </div>
 </script>
@@ -120,6 +122,46 @@
 </center>
   </div>
 </script>
+
+
+
+
+
+
+
+
+<!-- View for status -->
+<script type = "text/ng-template" id = "status.htm">
+<div class="well" style="background-color:#66b2ff;color:white">Todays Status   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
+<div class="panel-group">
+  <div class="panel panel-primary">
+	<div class="panel-heading">{{todos.getM}} Status</div>
+    <div class="panel-body">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th ng-repeat="itm in items track by $index">{{itm}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td ng-repeat="itm in items track by $index">{{mStatus[itm]}}</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+
+	</div>
+  </div>
+
+
+
+</script>
+
+
+
 
 
 </div>
