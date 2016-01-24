@@ -40,10 +40,12 @@ angular.module('starter.services', [])
   		var today=[];
   		console.log("clalled");
   		var eTemplets=JSON.parse(localStorage.getItem("eTemplets"));
+      if(eTemplets==null)
+        return [];
   		var d=new Date();
   		var dd=d.getDate();
   		var mm=d.getMonth();
-  		var yy=d.getYear();
+  		var yy=d.getYear();[{"fr":1,"did":true,"name":"travel","desc":"office","amount":20,"date":"2016-01-24T19:17:55.857Z","$$hashKey":"object:24"},{"did":true,"name":"fg","desc":"gd","amount":2,"$$hashKey":"object:39","date":"2016-01-24T19:17:55.857Z"}]
   		//console.log(eTemplets.length);
   		for(var i=0;i<eTemplets.length;i++)
   		{
@@ -158,7 +160,7 @@ angular.module('starter.services', [])
 			for(var i=0;i<eTemplets.length;i++)
 			{
 				st[eTemplets[i].name]=0;
-				this.items.push(eTemplets[i].name);
+				//this.items.push(eTemplets[i].name);
 			}
 			var keys=JSON.parse(localStorage.getItem("keys"));
 			for(var i=0;i<keys.length;i++)
@@ -167,7 +169,10 @@ angular.module('starter.services', [])
 				console.log(logs);
 				for(var j=0;j<logs.length;j++)
 				{
+          this.items.push(logs[j].name);
 					console.log("for"+logs[i].name);
+          if(st[logs[j].name]==null)
+          st[logs[j].name]=0;
 					st[logs[j].name]=parseInt(st[logs[j].name])+parseInt(logs[j].amount);
 				}
 			}

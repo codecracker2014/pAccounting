@@ -3,14 +3,36 @@ angular.module('starter.controllers', [])
 .controller('activeTodoController', function($scope,dao) {
   dao.getExpToday();
 	$scope.todos=dao.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
-	$scope.todos.date=new Date();
+  $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
-	$scope.todos.save=function()
+  $scope.addN=[];
+  $scope.todos.save=function()
 	{
-		dao.save($scope.todos);
 
+     console.log("hh");
+     console.log($scope.addN);
+     for(var i=0;i<$scope.addN.length;i++)
+     {
+       console.log(i);
+          $scope.todos.push($scope.addN[i]);
+     }
+      //$scope.todos.concat($scope.addN);
+
+    console.log("Los");
+    console.log($scope.todos);
+		dao.save($scope.todos);
+    $scope.addN=[];
 
 	}
+
+  $scope.todos.addNew=function()
+	{
+//
+//  console.log("i was callred");
+    var tmp={did:false,name:'',desc:'',amount:0};
+    $scope.addN.push(tmp);
+	}
+
 	$scope.todos.getData=function()
 	{
 		dao.getData();
