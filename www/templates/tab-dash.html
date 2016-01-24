@@ -1,0 +1,27 @@
+
+<ion-view view-title="Today's Transactions">
+  <ion-content class="padding">
+
+
+  <div class="list card" ng-repeat="todo in todos">
+<!--
+	<div class="item item-divider"><input type="checkbox" ng-model="todo.did" />  {{todo.name}}</div>
+
+
+	<label>Acivity:</label><input class="form-control" type="text" ng-model="todo.desc">
+	<label>Amount:</label><input class="form-control" type="text" ng-model="todo.amount">
+-->
+	<ion-checkbox ng-model="todo.did">{{todo.name}}</ion-checkbox>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc">
+  </label>
+  <label class="item item-input">
+    <input type="text" placeholder="Amount" ng-model="todo.amou">
+  </label>
+  </div>
+  <button class="button button-block button-positive" ng-click="todos.save()">
+    Save
+  </button>
+  </ion-content>
+</ion-view>

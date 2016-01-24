@@ -1,0 +1,100 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <ion-list>
+      <!-- View for config -->
+
+      <div class="list card" >
+        <div class="item item-divider">
+          Expenses
+
+        </div>
+        <div class="item item-divider">Add new Expense</div>
+        <div class="item">
+
+            <ion-checkbox ng-model="en.did">Default</ion-checkbox>
+
+            <label class="item item-input">
+             <span class="input-label">Description</span>
+                <input type="text" placeholder="Description" ng-model="en.desc">
+              </label>
+            <label class="item item-input">
+            <span class="input-label">Amount</span>
+            <input type="number" placeholder="Amount" ng-model="en.amount">
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Frequency</span>
+            <input type="text" placeholder="Frequency" ng-model="en.fr">
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Date</span>
+            <input type="text" placeholder="Date" ng-model="en.date">
+            </label>
+            <center>
+            <button class="button button-block button-positive" ng-click="save()">
+            Save
+            </button>
+          </center>
+
+        </div>
+        <div class="item item-divider">
+          Update Expenses
+        </div>
+        <div ng-repeat="e in exp track by $index" class="item">
+
+        <ion-checkbox ng-model="e.did">{{e.name}}</ion-checkbox>
+
+        <label class="item item-input">
+         <span class="input-label">Description</span>
+            <input type="text" placeholder="Description" ng-model="e.desc">
+          </label>
+        <label class="item item-input">
+        <span class="input-label">Amount</span>
+        <input type="number" placeholder="Amount" ng-model="e.amount">
+        </label>
+        <label class="item item-input">
+         <span class="input-label">Frequency</span>
+        <input type="text" placeholder="Frequency" ng-model="e.fr">
+        </label>
+        <label class="item item-input">
+         <span class="input-label">Date</span>
+        <input type="text" placeholder="Date" ng-model="e.date">
+        </label>
+
+        </div>
+
+
+        </div>
+        <!--
+        	<label>Income</label>
+      	<br>
+          <div class="panel panel-primary" ng-repeat="i in inc">
+
+      	<div class="panel-heading"><input type="checkbox" ng-model="e.did" />  {{e.name}}</div>
+          <div class="panel-body">
+
+  <div id="addExp" class="collapse"><label>New Expense</label><br>
+  <label>Default:</label><input type="checkbox" ng-model="en.did" ><br>
+  <label>Name:</label><input class="form-control" type="text" ng-model="en.name">
+  <label>Desc:</label><input class="form-control" type="text" ng-model="en.desc">
+	<label>Amount:</label><input class="form-control" type="text" ng-model="en.amount">
+	<label>Frequency:</label><input class="form-control" type="number" ng-model="en.fr">
+	<label>Date:</label><input class="form-control" type="text" ng-model="en.date">
+
+      	<label>Acivity:</label><input class="form-control" type="text" ng-model="e.desc">
+      	<label>Amount:</label><input class="form-control" type="text" ng-model="e.amount">
+
+      	</div>
+        </div>
+        <br><center>
+
+        <button type="button" class="btn btn-primary" ng-click="todos.save()">Save</button>
+        <button type="button" class="btn btn-primary" ng-click="todos.getData()">Save</button>
+      </center>
+        </div>
+
+
+
+-->
+    </ion-list>
+  </ion-content>
+</ion-view>

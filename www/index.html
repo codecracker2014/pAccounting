@@ -1,174 +1,53 @@
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
 
-   <head>
-      <title>Angular JS Controller</title>
-      <script src = "./lib/angular/angular.min.js"></script>
-	  <script src = "./js/myController.js"></script>
-	  <script src = "./js/mainApp.js"></script>
-	  <script src = "./lib/angular/angular-route.min.js"></script>
-	  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
-  <script src="./lib/bootstrap/js/jquery.min.js"></script>
-  <script src="./lib/pounchDB/pouchdb-5.2.0.min.js"></script>
-  <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-   </head>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
 
-   <body>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
-      <div ng-app = "mainApp" ng-controller = "appController">
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src = "js/func.js"></script>
 
+    <!-- add bootstrap-->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <script src="lib/bootstrap/js/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
-
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">pAccounting</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-
-        <li>
-          <a href="#activeTodo">Active todo</a>
-        </li>
-        <li><a href="#status">Status</a></li>
-        <li><a href="#config">Config</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- App Templets-->
-
-<!-- For active todos-->
-
-<div ng-view>
-  <script type = "text/ng-template" id = "activeTodo.htm">
-<div class="well" style="background-color:#66b2ff;color:white">Todays E. Logs   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
-<div class="panel-group">
-
-  <div class="panel panel-primary" ng-repeat="todo in todos">
-
-	<div class="panel-heading"><input type="checkbox" ng-model="todo.did" />  {{todo.name}}</div>
-    <div class="panel-body">
-
-	<label>Acivity:</label><input class="form-control" type="text" ng-model="todo.desc">
-	<label>Amount:</label><input class="form-control" type="text" ng-model="todo.amount">
-
-	</div>
-  </div>
-  <br><center>
-
-  <button type="button" class="btn btn-primary" ng-click="todos.save()">Save</button>
-  <button type="button" class="btn btn-primary" ng-click="todos.getData()">get</button>
-</center>
-  </div>
-</script>
+  </head>
+  <body ng-app="starter">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
 
 
-
-<!-- View for config-->
-  <script type = "text/ng-template" id = "config.htm">
-<div class="well" style="background-color:#66b2ff;color:white">Todays E. Logs   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
-<div class="panel-group">
-
-	<label>Expense</label>
-  <div class="panel panel-primary" ng-repeat="e in exp track by $index">
-	<div class="panel-heading"><input type="checkbox" ng-model="e.did" />  {{e.name}}</div>
-    <div class="panel-body">
-
-	<label>Acivity:</label><input class="form-control" type="text" ng-model="e.desc">
-	<label>Amount:</label><input class="form-control" type="text" ng-model="e.amount">
-	<label>Frequency:</label><input class="form-control" type="number" ng-model="e.fr">
-	<label>Date:</label><input class="form-control" type="text" ng-model="e.date">
-
-	</div>
-  </div>
-
-  <div id="addExp" class="collapse"><label>New Expense</label><br>
-  <label>Default:</label><input type="checkbox" ng-model="en.did" ><br>
-  <label>Name:</label><input class="form-control" type="text" ng-model="en.name">
-  <label>Desc:</label><input class="form-control" type="text" ng-model="en.desc">
-	<label>Amount:</label><input class="form-control" type="text" ng-model="en.amount">
-	<label>Frequency:</label><input class="form-control" type="number" ng-model="en.fr">
-	<label>Date:</label><input class="form-control" type="text" ng-model="en.date">
-	<br>
-  <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-
-  </div>
-<center><br>
-  <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#addExp">+</button></center>
-  <br>
-  	<label>Income</label>
-	<br>
-    <div class="panel panel-primary" ng-repeat="i in inc">
-
-	<div class="panel-heading"><input type="checkbox" ng-model="e.did" />  {{e.name}}</div>
-    <div class="panel-body">
-
-	<label>Acivity:</label><input class="form-control" type="text" ng-model="e.desc">
-	<label>Amount:</label><input class="form-control" type="text" ng-model="e.amount">
-
-	</div>
-  </div>
-  <br><center>
-
-  <button type="button" class="btn btn-primary" ng-click="todos.save()">Save</button>
-  <button type="button" class="btn btn-primary" ng-click="todos.getData()">Save</button>
-</center>
-  </div>
-</script>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view>
 
 
-
-
-
-
-
-
-<!-- View for status -->
-<script type = "text/ng-template" id = "status.htm">
-<div class="well" style="background-color:#66b2ff;color:white">Todays Status   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
-<div class="panel-group">
-  <div class="panel panel-primary">
-	<div class="panel-heading">{{todos.getM}} Status</div>
-    <div class="panel-body">
-    <table class="table table-condensed">
-      <thead>
-        <tr>
-          <th ng-repeat="itm in items track by $index">{{itm}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td ng-repeat="itm in items track by $index">{{mStatus[itm]}}</td>
-
-        </tr>
-
-      </tbody>
-    </table>
-
-
-	</div>
-  </div>
-
-
-
-</script>
-
-
-
-
-
-</div>
-
-
-
-      </div>
-</div>
-   </body>
+    </ion-nav-view>
+  </body>
 </html>
