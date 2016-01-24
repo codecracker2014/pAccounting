@@ -1,4 +1,5 @@
-# pAccounting personal finance solution in your hands
+# pAccounting
+###### **personal finance solution in your hands**
 - MAKE WISER SPENDING DECISIONS
 - Easy solution to your personal finance
 - Now easily track where your money goes, limit unwanted spending, and save for future goals.
