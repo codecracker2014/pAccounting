@@ -66,7 +66,7 @@ mainApp.service('statusService', function(){
 				for(var j=0;j<logs.length;j++)
 				{
 					console.log("for"+logs[i].name);
-					st[logs[j].name]=st[logs[j].name]+logs[j].amount;
+					st[logs[j].name]=parseInt(st[logs[j].name])+parseInt(logs[j].amount);
 				}
 			}
 			console.log(st);
@@ -196,7 +196,7 @@ mainApp.controller('activeTodoController', function($scope,dao) {
   dao.getExpToday();
 	$scope.todos=dao.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
 	$scope.todos.date=new Date();
-    $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
+  $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
 	$scope.todos.save=function()
 	{
 		dao.save($scope.todos);
@@ -224,6 +224,7 @@ mainApp.controller('configController', function($scope,dao) {
     $scope.exp=[];
 
   }
+
   console.log($scope.exp);
 	$scope.inc=[{fr:30,did:true,name:'salary',desc:'Salary income',amount:33835,date:'01'}];
 	$scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
