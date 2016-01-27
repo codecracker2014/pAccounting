@@ -10,14 +10,19 @@
         <div class="item item-divider">Totals</div>
         <div class="item">
           <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th ng-repeat="itm in items track by $index">{{itm}}</th>
+            <thead >
+              <tr class="info">
+
+                  <th>Expense</th>
+                  <th>Total</th>
+                  <th>Total Transactions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td ng-repeat="itm in items track by $index">{{mStatus[itm]}}</td>
+              <tr ng-repeat="itm in items track by $index" >
+                <td  >{{itm}}</td>
+                <td >{{mStatus[itm]}}</td>
+                <td >1</td>
 
               </tr>
 

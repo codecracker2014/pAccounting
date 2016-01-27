@@ -1,12 +1,12 @@
 angular.module('starter.controllers', [])
 
 .controller('activeTodoController', function($scope,dao) {
-  dao.getExpToday();
-	$scope.todos=dao.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
+  //dao.getExpToday();
+	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
   $scope.addN=[];
-  $scope.todos.save=function()
+  $scope.save=function()
 	{
 
      console.log("hh");
@@ -14,18 +14,19 @@ angular.module('starter.controllers', [])
      for(var i=0;i<$scope.addN.length;i++)
      {
        console.log(i);
-          $scope.todos.push($scope.addN[i]);
+          $scope.todos.today.push($scope.addN[i]);
      }
       //$scope.todos.concat($scope.addN);
 
     console.log("Los");
     console.log($scope.todos);
-		dao.save($scope.todos);
+		dao.save($scope.todos.today);
+    console.log("no");
     $scope.addN=[];
 
 	}
 
-  $scope.todos.addNew=function()
+  $scope.addNew=function()
 	{
 //
 //  console.log("i was callred");
@@ -72,7 +73,7 @@ angular.module('starter.controllers', [])
   //var tmp=[{fr:1,did:true,name:'travel',desc:'',amount:20,date:''},{fr:1,did:true,name:'lunch',desc:'',amount:40,date:''},{fr:30,did:true,name:'home',desc:'For home',amount:15000,date:'01'}];
   //localStorage.setItem("eTemplets",JSON.stringify(tmp));
   console.log("Config called");
-	$scope.exp=JSON.parse(localStorage.getItem("eTemplets"));
+	$scope.exp=dao.getEtemplets();
   if($scope.exp==null)
   {
     console.log("1");
@@ -95,6 +96,7 @@ angular.module('starter.controllers', [])
     localStorage.setItem("eTemplets",JSON.stringify($scope.exp));
 		console.log(JSON.parse(localStorage.getItem("eTemplets")));
 		//$scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
+    dao.refresh();
     $scope.en=[];
 	}
 
