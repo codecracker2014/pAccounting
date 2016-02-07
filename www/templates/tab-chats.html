@@ -19,9 +19,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="itm in items track by $index" >
+              <tr ng-repeat="itm in status.items track by $index" >
                 <td  >{{itm}}</td>
-                <td >{{mStatus[itm]}}</td>
+                <td >{{status.mStatus[itm]}}</td>
                 <td >1</td>
 
               </tr>
@@ -30,6 +30,11 @@
           </table>
 
         </div>
+        <div class="item item-divider">
+          Chart
+          <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div>
+        </div>
+
         <div class="item item-divider">
           Others
         </div>

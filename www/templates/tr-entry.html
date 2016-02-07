@@ -1,0 +1,79 @@
+
+<ion-view view-title="Today's Transactions">
+  <ion-content class="padding">
+
+    <ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
+      <button class="button   button-block" style="font-size:26px; padding:10px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate.getDate()}} {{month}}</button>
+    </ionic-datepicker>
+    <div class="card" style="padding:0px;margin:0px;">
+      {{title}}
+      <button type="button" class="btn btn-primary btn-xs" ng-click="addNew()" style="float:right">+ New</button>
+
+    </div>
+<ion-slide-box on-slide-changed="slideHasChanged($index)" class="{{showList}}" does-continue="true" ng-if="todos.today.length">
+<ion-slide ng-repeat="todo in todos.today track by $index" >
+
+  <div class="list card" >
+	<ion-checkbox ng-model="todo.did">{{todo.name}}</ion-checkbox>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide>
+</ion-slide-box>
+    <div class="list card" ng-repeat="todo in addN">
+  <!--
+  	<div class="item item-divider"><input type="checkbox" ng-model="todo.did" />  {{todo.name}}</div>
+
+
+  	<label>Acivity:</label><input class="form-control" type="text" ng-model="todo.desc">
+  	<label>Amount:</label><input class="form-control" type="text" ng-model="todo.amount">
+  -->
+
+  	<ion-checkbox ng-model="todo.did">
+      Default
+</ion-checkbox>
+<label class="item item-input">
+    <input type="text" placeholder="Name" ng-model="todo.name">
+  </label>
+  <label class="item item-input">
+      <input type="text" placeholder="Description" ng-model="todo.desc">
+    </label>
+    <label class="item item-input">
+      <input type="number" placeholder="Amount" ng-model="todo.amount">
+    </label>
+    <br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThisNew(todo)">save</button>
+    </div>
+<div class="">
+  <table class="table table-condensed">
+    <thead >
+      <tr class="info">
+
+          <th>Name</th>
+          <th>Desc</th>
+          <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="itm in todos.saved track by $index" ng-click="update(itm)" >
+        <td  >{{itm.name}}</td>
+        <td >{{itm.desc}}</td>
+        <td >{{itm.amount}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+  </ion-content>
+</ion-view>
