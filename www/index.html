@@ -40,7 +40,19 @@
 <script src="lib/datepicker/templates.min.js"></script>
 <script src="lib/datepicker/ionic-datepicker.min.js"></script>
 <style>
-
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
 </style>
   </head>
   <body ng-app="starter" ng-controller="starter">

@@ -5,7 +5,9 @@ angular.module('starter.controllers', [])
 	//$scope.dt=AppDate.getAppDate();
 	$scope.currentDate = dao.date;
 	$scope.month=month_name(dao.date.getMonth(),1);
+	$scope.level=dao.level;
 	console.log("month"+$scope.month);
+
 	//$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
 	//$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
 	$scope.datePickerCallback = function (val) {
@@ -26,6 +28,44 @@ angular.module('starter.controllers', [])
 			console.log("Updated");
 		}
 	};
+//Start date
+	$scope.currentDate1 = dao.startDate;
+	$scope.month1=month_name(dao.startDate.getMonth(),1);
+	console.log("month1"+$scope.month1);
+	//$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
+	//$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
+	$scope.datePickerCallback1 = function (val) {
+		if (!val) {
+			console.log('Date not selected');
+		} else {
+			dao.startDate=val;
+			dao.refresh();
+			console.log('Selected date is : ', val);
+			$scope.month1=month_name(dao.startDate.getMonth(),1);
+
+		}
+	};
+
+//end Date
+$scope.currentDate2 = dao.endDate;
+$scope.month2=month_name(dao.endDate.getMonth(),1);
+console.log("month2"+$scope.month2);
+//$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
+//$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
+$scope.datePickerCallback2 = function (val) {
+	if (!val) {
+		console.log('Date not selected');
+	} else {
+		dao.endDate=val;
+		dao.refresh();
+
+		console.log('Selected date is : ', val);
+		$scope.month2=month_name(dao.endDate.getMonth(),1);
+
+	}
+};
+
+
 
 })
 
@@ -104,10 +144,13 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('configController', function($scope,dao,$ionicScrollDelegate) {
+.controller('configController', function($scope,dao,$ionicScrollDelegate,$ionicActionSheet,$timeout,$ionicPopup) {
 
   //var tmp=[{fr:1,did:true,name:'travel',desc:'',amount:20,date:''},{fr:1,did:true,name:'lunch',desc:'',amount:40,date:''},{fr:30,did:true,name:'home',desc:'For home',amount:15000,date:'01'}];
   //localStorage.setItem("eTemplets",JSON.stringify(tmp));
+	$scope.level=dao.level;
+	$scope.level1Hide="";
+	$scope.levelHide="ng-hide";
   console.log("Config called");
 	$scope.exp=dao.getEtemplets();
 	if($scope.exp==null)
@@ -120,6 +163,22 @@ angular.module('starter.controllers', [])
 	$scope.showForm="ng-hide";
 	$scope.action="save"
 	$scope.state="n";
+	$scope.cateList=dao.getCatList();
+	$scope.groups=dao.groups;
+	$scope.toggleGroup = function(group) {
+		if ($scope.isGroupShown(group)) {
+			console.log("11");
+			$scope.shownGroup = null;
+		} else {
+
+			$scope.shownGroup = group;
+		}
+	};
+	$scope.isGroupShown = function(group) {
+
+		return this.shownGroup === group;
+	};
+
 	var dummyExp={fr:1,did:true,name:'',desc:'',amount:'',date:''};
   if($scope.exp==null)
   {
@@ -236,12 +295,128 @@ angular.module('starter.controllers', [])
 		$scope.state="n"
 		$scope.showForm="";
 	}
+	$scope.show = function() {
+
+	 // Show the action sheet
+
+	 levels=dao.getLevels();
+	 var hideSheet = $ionicActionSheet.show({
+		 buttons: levels,
+		 titleText: 'Levels',
+		 cancelText: 'Cancel',
+		 cancel: function() {
+					console.log("I was called");
+				},
+		 buttonClicked: function(index) {
+
+			 	 if(index==0)
+				 {
+
+					 dao.addLevel();
+					 dao.updateLevel(levels.length-1);
+  				 	$scope.level=dao.level;
+					 $scope.levelHide="";
+					 $scope.level1Hide="ng-hide";
+
+				 }
+				 else if(index==1)
+				 {
+					 $scope.level1Hide="";
+					 $scope.levelHide="ng-hide";
+					 dao.updateLevel(index);
+ 				 	$scope.level=dao.level;
+
+				 }
+				 else
+				 {
+					 $scope.levelHide="";
+					 $scope.level1Hide="ng-hide";
+
+					dao.updateLevel(index);
+				 	$scope.level=dao.level;
+					$scope.groups=dao.groups;
+				}
+			 return true;
+		 }
+	 })
+
+	 // For example's sake, hide the sheet after two seconds
+	 $timeout(function() {
+		 hideSheet();
+	 }, 4000);
+
+ };
+$scope.showPopup=function()
+{
+	$scope.catAdd = {};
+	var myPopup = $ionicPopup.show({
+    template: '<input type="text" ng-model="catAdd.name">',
+    title: 'Enter Category Name',
+    subTitle: '',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Save</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          if ($scope.catAdd.name==null) {
+//						console.log("me"+$scope.catAdd.name);
+			      //don't allow the user to close unless he enters wifi password
+            e.preventDefault();
+          } else {
+	//					console.log($scope.catAdd.name);
+						dao.addNewCategory($scope.catAdd.name);
+
+		        return $scope.catAdd.name;
+          }
+        }
+      }
+    ]
+  });
+}
+
+$scope.showSelect=function(name)
+{
+	$scope.list=[];
+  console.log("name"+name);
+	$scope.list=dao.getExpList();
+	console.log($scope.list);
+	$scope.listData={};
+	$scope.listData.name=name;
+	var myPopup = $ionicPopup.show({
+    template: "<div class='list'> <label class='item item-input item-select'><div class='input-label'> Expenses </div>\
+		<select ng-model='listData.selected'><option ng-repeat='itm in list track by $index'>{{itm}}</option></select> </label></div>",
+    title: 'Enter Category Name',
+    subTitle: '',
+    scope: $scope,
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Add</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          if ($scope.listData.selected==null) {
+//						console.log("me"+$scope.catAdd.name);
+			      //don't allow the user to close unless he enters wifi password
+            e.preventDefault();
+          } else {
+	//					console.log($scope.catAdd.name);
+						dao.addNewExp($scope.listData.name,$scope.listData.selected);
+
+		        return $scope.listData.selected;
+          }
+        }
+      }
+    ]
+  });
+}
 })
 
 
 
 //Status controller
-.controller('statusController', function($scope,dao,statusService) {
+.controller('statusController', function($scope,dao,statusService,$ionicActionSheet,$timeout) {
   $scope.todos=[];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
@@ -251,6 +426,55 @@ angular.module('starter.controllers', [])
 	$scope.status=statusService;
 	$scope.height=statusService.width;
 	$scope.width=statusService.height;
+	$scope.hideChart="ng-hide";
+	$scope.hideTotals="";
+	$scope.hideHistogram="ng-hide";
   console.log("Status");
+
+	$scope.show = function() {
+
+   // Show the action sheet
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: 'Totals' },
+       { text: 'Pie Chart' },
+			 { text: 'Histogram' }
+     ],
+     titleText: 'Stastics',
+     cancelText: 'Cancel',
+     cancel: function() {
+          console.log("I was called");
+        },
+     buttonClicked: function(index) {
+			 console.log("index"+index);
+			 if(index==0)
+			 {
+				 $scope.hideChart="ng-hide";
+				 $scope.hideTotals="";
+				 $scope.hideHistogram="ng-hide";
+			 }
+			 else if(index==1)
+			 {
+				 $scope.hideHistogram="ng-hide";
+				 $scope.hideChart="";
+				 $scope.hideTotals="ng-hide";
+			 }
+			 else if(index==2)
+			 {
+				 $scope.hideHistogram="";
+				 $scope.hideChart="ng-hide";
+				 $scope.hideTotals="ng-hide";
+			 }
+
+       return true;
+     }
+   });
+
+   // For example's sake, hide the sheet after two seconds
+   $timeout(function() {
+     hideSheet();
+   }, 2000);
+
+ };
 
 });

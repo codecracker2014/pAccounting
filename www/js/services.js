@@ -8,6 +8,170 @@ angular.module('starter.services', [])
   this.date=new Date();
   this.data.months=["jan"];
   this.saved=[];
+  this.level="Level-1";
+  this.levels=[];
+  this.catList=[];
+  this.groups=[];
+  this.startDate=new Date();
+  this.startDate.setDate(1);
+  this.endDate=new Date();
+  this.updateLevel=function(index)
+  {
+      if(index!=null)
+      {
+        x=index;
+        this.level="Level-"+x;
+
+      }
+      this.groups=[];
+      this.getCatList();
+      console.log("level updated"+this.level);
+      if(this.cateList!=null)
+      {
+        for (var i=0; i<this.cateList.length; i++) {
+          this.groups[i] = {
+            name: this.cateList[i],
+            items: []
+          };
+            items=JSON.parse(localStorage.getItem(this.level+this.groups[i].name));
+      /*      console.log("key "+this.level+this.groups[i].name);
+            console.log("itms "+this.groups[i].items);
+            if(this.groups[i].items=null)
+            this.groups[i].items=[];*/
+            if(items!=null)
+            {
+              for (var j=0; j<items.length; j++) {
+                  this.groups[i].items.push(items[j]);
+                }
+            }
+        }
+      }
+      else {
+        console.log("hi");
+        this.group=[];
+      }
+
+  }
+
+  this.getExpList=function()
+  {
+    //console.log("i m");
+    if(this.level=="Level-2")
+    {
+      //console.log("hi");
+      var lst=[];
+      var etmp=JSON.parse(localStorage.getItem("eTemplets"));
+      if(etmp!=null)
+      {  for(var i=0;i<etmp.length;i++)
+        {
+          lst.push(etmp[i].name);
+        }
+      }
+      return lst;
+    }
+    else {
+
+      var lst=[];
+      var t=this.level.charAt(6);
+      t--;
+      level="Level-"+t;
+      console.log(level+"-cat");
+      var etmp=JSON.parse(localStorage.getItem(level+"-cat"));
+      if(etmp!=null)
+      {
+          lst=etmp;
+      }
+
+      return lst;
+    }
+
+    //this.=JSON.parse(localStorage.getItem("levels"));
+  }
+  this.addNewExp=function(cat,itm)
+  {
+      list=JSON.parse(localStorage.getItem(this.level+cat));
+      if(list==null)
+      {
+        list=[];
+        list.push(itm);
+        localStorage.setItem(this.level+cat,angular.toJson(list));
+
+      }
+      else {
+        list.push(itm);
+        localStorage.setItem(this.level+cat,angular.toJson(list));
+
+      }
+      this.updateLevel();
+  }
+  this.getLevels=function()
+  {
+    this.levels=JSON.parse(localStorage.getItem("levels"));
+    if(this.levels==null)
+    {
+      this.levels=[{text:"Add Level"},{text:"Level-1"}];
+      localStorage.setItem("levels",angular.toJson(this.levels));
+    }
+    return this.levels;
+  }
+  this.addLevel=function()
+  {
+    var currentLevel=this.levels.length;
+    this.levels.push({text:"Level-"+currentLevel});
+    localStorage.setItem("levels",angular.toJson(this.levels));
+    console.log(this.levels.length);
+  }
+  this.addNewCategory=function(name)
+  {
+
+    cate=JSON.parse(localStorage.getItem(this.level+"-cat"));
+    if(cate!=null)
+    {
+      if(cate.indexOf(name)!=-1)
+      {
+        return -1;
+      }
+      else {
+        cate.push(name);
+        this.catList=cate;
+        localStorage.setItem(this.level+"-cat",angular.toJson(this.catList));
+      }
+    }
+    else {
+      cate=[];
+      cate.push(name);
+      this.catList=cate;
+      localStorage.setItem(this.level+"-cat",angular.toJson(this.catList));
+    }
+
+    console.log("Called");
+  }
+  this.getCatList=function()
+  {
+    console.log("2Called");
+    console.log(this.level+"-cat");
+    cate=JSON.parse(localStorage.getItem(this.level+"-cat"));
+    console.log("cat"+cate);
+    if(cate==null)
+    {
+      this.cateList=[];
+      return [];
+    }
+    else {
+      this.cateList=cate;
+      return this.cateList;
+    }
+  }
+
+
+
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+
+
+  //end level implementation
   this.loadSaved=function()
   {
 
@@ -285,9 +449,10 @@ this.showAlert=function(title,message)
 		this.items=[];
     this.dataPoints=[];
     this.mStatus=[];
-
+    this.total=0;
     this.width="300px";
     this.height="100%";
+    this.fr=[];
 		this.monthlyStatus=function()
 		{
 			var st=[];
@@ -309,7 +474,12 @@ this.showAlert=function(title,message)
               st[logs[j].name]=0;
           }
 					st[logs[j].name]=parseInt(st[logs[j].name])+parseInt(logs[j].amount);
-
+          this.total=this.total+parseInt(logs[j].amount);
+          if(this.fr[logs[j].name]!=null)
+              this.fr[logs[j].name]=parseInt(this.fr[logs[j].name])+1;
+          else {
+            this.fr[logs[j].name]=1;
+          }
 				}
 			}
       for(var i=0;i<this.items.length;i++)
