@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('starter',function ($scope,dao,$ionicSlideBoxDelegate) {
+.controller('starter',function ($scope,dao,statusService,$ionicSlideBoxDelegate) {
 	// body...
 	//$scope.dt=AppDate.getAppDate();
 	$scope.currentDate = dao.date;
@@ -29,8 +29,8 @@ angular.module('starter.controllers', [])
 		}
 	};
 //Start date
-	$scope.currentDate1 = dao.startDate;
-	$scope.month1=month_name(dao.startDate.getMonth(),1);
+	$scope.currentDate1 = statusService.startDate;
+	$scope.month1=month_name(statusService.startDate.getMonth(),1);
 	console.log("month1"+$scope.month1);
 	//$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
 	//$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
@@ -38,17 +38,17 @@ angular.module('starter.controllers', [])
 		if (!val) {
 			console.log('Date not selected');
 		} else {
-			dao.startDate=val;
-			dao.refresh();
+			statusService.startDate=val;
+			statusService.refresh();
 			console.log('Selected date is : ', val);
-			$scope.month1=month_name(dao.startDate.getMonth(),1);
+			$scope.month1=month_name(statusService.startDate.getMonth(),1);
 
 		}
 	};
 
 //end Date
-$scope.currentDate2 = dao.endDate;
-$scope.month2=month_name(dao.endDate.getMonth(),1);
+$scope.currentDate2 = statusService.endDate;
+$scope.month2=month_name(statusService.endDate.getMonth(),1);
 console.log("month2"+$scope.month2);
 //$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
 //$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
@@ -56,11 +56,11 @@ $scope.datePickerCallback2 = function (val) {
 	if (!val) {
 		console.log('Date not selected');
 	} else {
-		dao.endDate=val;
-		dao.refresh();
+		statusService.endDate=val;
+		statusService.refresh();
 
 		console.log('Selected date is : ', val);
-		$scope.month2=month_name(dao.endDate.getMonth(),1);
+		$scope.month2=month_name(statusService.endDate.getMonth(),1);
 
 	}
 };
@@ -476,5 +476,59 @@ $scope.showSelect=function(name)
    }, 2000);
 
  };
+
+$scope.showLevel=function()
+{
+	console.log("dl");
+	levels=dao.getLevels();
+	var hideSheet = $ionicActionSheet.show({
+		buttons: levels,
+		titleText: 'Levels',
+		cancelText: 'Cancel',
+		cancel: function() {
+				 console.log("I was called");
+			 },
+		buttonClicked: function(index) {
+
+				if(index==0)
+				{
+
+					dao.addLevel();
+					dao.updateLevel(levels.length-1);
+					 $scope.level=dao.level;
+					$scope.levelHide="";
+					$scope.level1Hide="ng-hide";
+
+				}
+				else if(index==1)
+				{
+					$scope.level1Hide="";
+					$scope.levelHide="ng-hide";
+					dao.updateLevel(index);
+				 $scope.level=dao.level;
+
+				}
+				else
+				{
+					$scope.levelHide="";
+					$scope.level1Hide="ng-hide";
+
+				 dao.updateLevel(index);
+				 $scope.level=dao.level;
+				 $scope.groups=dao.groups;
+			 }
+			return true;
+		}
+	})
+
+	// For example's sake, hide the sheet after two seconds
+	$timeout(function() {
+		hideSheet();
+	}, 4000);
+
+
+}
+
+
 
 });

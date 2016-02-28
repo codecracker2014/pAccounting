@@ -91,7 +91,98 @@ function getKey(d)
   console.log(key);
   return key;
 }
+//60215 280216
+//key1>key2
+function keyEquals(key1,key2)
+{
+//  console.log("key1:"+key1+" key2:"+key2);
+  var y1=parseInt(getYear(key1));
+  var m1=parseInt(getM(key1));
+  var d1=parseInt(getD(key1));
+  var y2=parseInt(getYear(key2));
+  var m2=parseInt(getM(key2));
+  var d2=parseInt(getD(key2));
+  if(y1>y2)
+  {
+    return true;
+  }
+  else if(y1<y2)
+  {
+    return false;
+  }
+  else {
+    if(m1>m2)
+    {
+      return true;
+    }
+    else if (m1<m2) {
+        return false;
+    }
+    else {
+      if(d1>d2)
+      {
+        return true;
+      }
+      else  {
+        return false;
 
+      }
+
+    }
+  }
+}
+
+function getYear(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(3,2);
+  }
+  else {
+    return key.substr(4,2);
+  }
+}
+function getM(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(1,2);
+  }
+  else {
+    return key.substr(2,2);
+  }
+}
+function getD(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(0,1);
+  }
+  else {
+    return key.substr(0,2);
+  }
+}
+
+
+
+function filterKeys(keys,startDate,endDate)
+{
+  var tmp=[];
+  var stKey=getKey(startDate);
+  var endKey=getKey(endDate);
+//  console.log("keys:"+keys+"stkey "+stKey);
+  for(i=0;i<keys.length;i++)
+  {
+  //  console.log("keys[i]"+keys[i]+"stKey"+stKey);
+    if((keyEquals(keys[i],stKey)||(keys[i]==stKey))&&(keyEquals(endKey,keys[i])||(keys[i]==endKey)))
+    {
+      tmp.push(keys[i]);
+    }
+  }
+
+  console.log("endKey"+endKey+"Selected:"+tmp);
+  return tmp;
+}
 
 /*function month_name(i,mode)
 {

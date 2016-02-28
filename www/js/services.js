@@ -12,9 +12,6 @@ angular.module('starter.services', [])
   this.levels=[];
   this.catList=[];
   this.groups=[];
-  this.startDate=new Date();
-  this.startDate.setDate(1);
-  this.endDate=new Date();
   this.updateLevel=function(index)
   {
       if(index!=null)
@@ -453,12 +450,18 @@ this.showAlert=function(title,message)
     this.width="300px";
     this.height="100%";
     this.fr=[];
+    this.startDate=new Date();
+    this.startDate.setDate(1);
+    this.endDate=new Date();
+
 		this.monthlyStatus=function()
 		{
 			var st=[];
 
 //      console.log("st"+st);
 			var keys=JSON.parse(localStorage.getItem("keys"));
+      keys=filterKeys(keys,this.startDate,this.endDate);
+      this.total=0;
       for(var i=0;i<keys.length;i++)
 			{
 				var logs=JSON.parse(localStorage.getItem(keys[i]));
@@ -495,7 +498,8 @@ this.showAlert=function(title,message)
       this.width="300px";
       this.height="100%";
 			this.mStatus= st;
-		}
+
+    }
     this.refresh=function()
     {
       console.log("Refreshing");
