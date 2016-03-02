@@ -87,7 +87,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
         controller: 'configController'
       }
     }
+  })
+
+  .state('tab.planning', {
+    url: '/planning',
+    views: {
+      'tab-planning': {
+        templateUrl: 'templates/tab-planning.html',
+        controller: 'planningController'
+      }
+    }
   });
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

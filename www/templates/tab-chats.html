@@ -68,36 +68,34 @@ Histogram
 
 
         </div>
-
-
-<!--
-      <div class="well" style="background-color:#66b2ff;color:white">Todays Status   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
-      <div class="panel-group">
-        <div class="panel panel-primary">
-      	<div class="panel-heading">{{todos.getM}} Status</div>
-          <div class="panel-body">
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th ng-repeat="itm in items track by $index">{{itm}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td ng-repeat="itm in items track by $index">{{mStatus[itm]}}</td>
-
-              </tr>
-
-            </tbody>
-          </table>
-
-
-      	</div>
-        </div>
--->
     </ion-list>
   </div>
-  <div class="{{levelHide}}">
+  <div class="{{levelHide}}" ng-controller="levelController">
+    <table class="table table-condensed">
+      <thead >
+        <tr class="info">
+
+            <th>Expense</th>
+            <th>Total</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="itm in currentData.currentItems track by $index" >
+          <td  >{{itm}}</td>
+          <td >{{currentData.currentList[itm]}}</td>
+
+
+        </tr>
+        <tr>
+          <td >Total</td>
+          <td >{{currentData.total}}</td>
+          <td ></td>
+
+        </tr>
+
+      </tbody>
+    </table>
 
   </div>
   </ion-content>
