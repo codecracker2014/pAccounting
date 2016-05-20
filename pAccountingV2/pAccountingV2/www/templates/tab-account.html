@@ -1,0 +1,140 @@
+<ion-view view-title="Account">
+  <ion-content>
+    <ion-list>
+      <!-- View for config -->
+      <button class="button button-small button-positive" ng-click="showAddE()">
+  Add Expense
+    </button>
+    <button class="button button-small button-positive">
+      Add Income
+    </button>
+
+      <div class="list card {{showForm}}" >
+        <div class="item item-divider">Add new Expense</div>
+        <div class="item">
+            <form name="expForm" novalidate>
+            <ion-checkbox ng-model="en.did">Default</ion-checkbox>
+            <label class="item item-input">
+             <span class="input-label">Name</span>
+                <input type="text" placeholder="Name" ng-model="en.name" required>
+              </label>
+
+            <label class="item item-input">
+             <span class="input-label">Description</span>
+                <input type="text" placeholder="Description" ng-model="en.desc">
+              </label>
+            <label class="item item-input">
+            <span class="input-label">Amount</span>
+            <input type="number" placeholder="Amount" ng-model="en.amount" required>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Frequency</span>
+            <input type="number" placeholder="Frequency" ng-model="en.fr" required>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Date</span>
+            <input type="number" placeholder="Date" ng-model="en.date" min="1" max="31">
+            </label>
+  <!--<ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
+    <button class="button button-block button-positive"> {{ currentDate | date:'MMMM/dd/yyyy' }} </button>
+</ionic-datepicker>
+-->
+            <br>
+            <button class="button button-{{exp.saveButton}} button-balanced" ng-disabled="expForm.$invalid" ng-click="save()">
+            {{exp.saveLabel}}
+            </button>
+            <button class="button button-calm button-assertive {{hide}}" ng-click="delete()" >
+            Delete
+            </button>
+            <button class="button button-calm button-light {{hide}}" ng-click="cancel()" >
+            Cancel
+            </button>
+
+        </form>
+        </div>
+      </div>
+        <div class="list card" >
+        <div class="item item-divider">
+          Expense categories
+        </div>
+        <di>
+<!--
+        <ion-checkbox ng-model="e.did">{{e.name}}</ion-checkbox>
+
+        <label class="item item-input">
+         <span class="input-label">Description</span>
+            <input type="text" placeholder="Description" ng-model="e.desc">
+          </label>
+        <label class="item item-input">
+        <span class="input-label">Amount</span>
+        <input type="number" placeholder="Amount" ng-model="e.amount">
+        </label>
+        <label class="item item-input">
+         <span class="input-label">Frequency</span>
+        <input type="text" placeholder="Frequency" ng-model="e.fr">
+        </label>
+        <label class="item item-input">
+         <span class="input-label">Date</span>
+        <input type="text" placeholder="Date" ng-model="e.date">
+        </label>
+        <button type="button" class="btn btn-primary" ng-click="update(e)">Edit</button>
+-->
+<table class="table table-condensed">
+  <thead >
+    <tr class="info">
+
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Amount</th>
+        <th>Frequency</th>
+        <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="itm in exp track by $index" ng-click="update(itm)" >
+      <td  >{{itm.name}}</td>
+      <td >{{itm.desc}}</td>
+      <td >{{itm.amount}}</td>
+      <td >{{itm.fr}}</td>
+      <td >{{itm.date}}</td>
+    </tr>
+
+  </tbody>
+</table>
+        </div>
+
+
+        </div>
+
+    </ion-list>
+  </ion-content>
+</ion-view>
+<!--
+  <label>Income</label>
+<br>
+  <div class="panel panel-primary" ng-repeat="i in inc">
+
+<div class="panel-heading"><input type="checkbox" ng-model="e.did" />  {{e.name}}</div>
+  <div class="panel-body">
+
+<div id="addExp" class="collapse"><label>New Expense</label><br>
+<label>Default:</label><input type="checkbox" ng-model="en.did" ><br>
+<label>Name:</label><input class="form-control" type="text" ng-model="en.name">
+<label>Desc:</label><input class="form-control" type="text" ng-model="en.desc">
+<label>Amount:</label><input class="form-control" type="text" ng-model="en.amount">
+<label>Frequency:</label><input class="form-control" type="number" ng-model="en.fr">
+<label>Date:</label><input class="form-control" type="text" ng-model="en.date">
+
+<label>Acivity:</label><input class="form-control" type="text" ng-model="e.desc">
+<label>Amount:</label><input class="form-control" type="text" ng-model="e.amount">
+
+</div>
+</div>
+<br><center>
+
+<button type="button" class="btn btn-primary" ng-click="todos.save()">Save</button>
+<button type="button" class="btn btn-primary" ng-click="todos.getData()">Save</button>
+</center>
+</div>
+
+-->

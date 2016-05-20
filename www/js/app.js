@@ -83,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+        templateUrl: 'templates/tab-setting.html',
         controller: 'configController'
       }
     }
@@ -94,6 +94,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
     views: {
       'tab-planning': {
         templateUrl: 'templates/tab-planning.html',
+        controller: 'planningController'
+      }
+    }
+  })
+  
+  .state('tab.planView', {
+    url: '/planView',
+    views: {
+      'tab-planning': {
+        templateUrl: 'templates/planView.html',
         controller: 'planningController'
       }
     }

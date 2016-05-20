@@ -1,16 +1,16 @@
 angular.module('starter.controllers')
 
-.controller('planningController', function($scope,planningService,$cordovaFile) {
+.controller('planningController', function($scope,planningService,$ionicActionSheet, $timeout,$ionicSideMenuDelegate) {
 
-  $scope.printIt = function(){
-    var doc = new jsPDF();
-doc.text(20, 20, 'Hello world!');
-doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-doc.addPage();
-doc.text(20, 20, 'Do you like that?');
-
-doc.save('Test.pdf');
+   $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+    console.log("Called left");
+    
   };
-
-
+  
+  $scope.addEvent=function()
+  {
+    
+  };
+  
 })

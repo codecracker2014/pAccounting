@@ -1,0 +1,131 @@
+
+<ion-view view-title="Setting">
+<!--  <div class="bar bar-subheader bar-positive">
+  <h2 class="title">Expenses</h2>
+  <a class=" "><ion-icon name="arrow-dropright"></ion-icon></a>
+</div>
+-->  <div class="bar bar-header bar-positive">
+  <h1 class="title">bar-positive</h1>
+</div>
+  <ion-nav-bar class="bar-dark">
+  <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
+  <ion-nav-buttons side="left" >
+ <button class="button button-outline" style="color:white" ng-click="show()">
+   {{level}}
+ </button>
+
+</ion-nav-buttons>
+
+  <ion-content >
+    <div class="{{level1Hide}}">
+    <ion-list>
+      <!-- View for config -->
+    
+   <button class="button button-full button-positive" ng-click="showAddE()">
+  Full Width Block Button HI
+</button>
+
+      <div class="list card {{showForm}}" >
+        <div class="item item-divider">Add new Expense</div>
+        <div class="item">
+            <form name="expForm" novalidate>
+            <ion-checkbox ng-model="en.did">Default</ion-checkbox>
+            <label class="item item-input">
+             <span class="input-label">Name</span>
+                <input type="text" placeholder="Name" ng-model="en.name" required>
+              </label>
+
+            <label class="item item-input">
+             <span class="input-label">Description</span>
+                <input type="text" placeholder="Description" ng-model="en.desc">
+              </label>
+            <label class="item item-input">
+            <span class="input-label">Amount</span>
+            <input type="number" placeholder="Amount" ng-model="en.amount" required>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Frequency</span>
+            <input type="number" placeholder="Frequency" ng-model="en.fr" required>
+            </label>
+            <label class="item item-input">
+             <span class="input-label">Date</span>
+            <input type="number" placeholder="Date" ng-model="en.date" min="1" max="31">
+            </label>
+            <br>
+            <button class="button button-{{exp.saveButton}} button-balanced" ng-disabled="expForm.$invalid" ng-click="save()">
+            {{exp.saveLabel}}
+            </button>
+            <button class="button button-calm button-assertive {{hide}}" ng-click="delete()" >
+            Delete
+            </button>
+            <button class="button button-calm button-light {{hide}}" ng-click="cancel()" >
+            Cancel
+            </button>
+
+        </form>
+        </div>
+      </div>
+        <div class="list card" >
+        <div class="item item-divider">
+          Expense categories
+        </div>
+        <di>
+
+<table class="table table-condensed">
+  <thead >
+    <tr class="info">
+
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Amount</th>
+        <th>Frequency</th>
+        <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="itm in exp track by $index" ng-click="update(itm)" >
+      <td  >{{itm.name}}</td>
+      <td >{{itm.desc}}</td>
+      <td >{{itm.amount}}</td>
+      <td >{{itm.fr}}</td>
+      <td >{{itm.date}}</td>
+    </tr>
+
+  </tbody>
+</table>
+        </div>
+
+
+        </div>
+
+    </ion-list>
+    <div>
+      <div class="{{levelHide}}">
+        <div class="bar bar-header bar-balanced">
+          <button class="button button-outline button-dark" style="color:white" side="left" ng-click="showPopup()">Add</button>
+          <h1 class="title">{{level}}</h1>
+        </div>
+        <div>
+          //list for adding
+          <br><br>
+          <ion-list>
+                  <div ng-repeat="group in groups">
+                    <ion-item class="item-stable"
+                              >
+                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-arrow-down-b' : 'ion-arrow-right-b'" ng-click="toggleGroup(group)"
+                        ng-class="{active: isGroupShown(group)}" style="width:50px"></i>
+                      &nbsp;
+                       <span style="color:blue" ng-click="showSelect(group.name)">Add</span>&nbsp;&nbsp;{{group.name}}
+                    </ion-item>
+                    <ion-item class="item-accordion"
+                              ng-repeat="item in group.items"
+                              ng-show="isGroupShown(group)">
+                      {{item}}
+                    </ion-item>
+                  </div>
+                </ion-list>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

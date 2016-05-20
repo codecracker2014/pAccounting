@@ -1,0 +1,142 @@
+<div class=" slider slider" on-slide-changed="slideHasChanged($index)" style="visibility: visible;">
+  <div class="slider-slides" ng-transclude="" style="width: 616px;">
+<!-- ngRepeat: todo in todos.today track by $index -->
+<ion-slide ng-repeat="todo in todos.today track by $index" class="slider-slide"
+data-index="0" style="width: 308px; left: 0px; transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+
+  <div class="list card">
+	<label class="item item-checkbox ng-valid" ng-model="todo.did">
+    <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+      <input type="checkbox" ng-model="todo.did" class="ng-pristine ng-untouched ng-valid">
+      <i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ng-transclude="">
+        <span class="ng-binding">travel</span></div></label>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name" class="ng-pristine ng-untouched ng-valid">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc" class="ng-pristine ng-untouched ng-valid">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount" class="ng-pristine ng-untouched ng-valid">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide><!-- end ngRepeat: todo in todos.today track by $index -->
+  <ion-slide ng-repeat="todo in todos.today track by $index" class="slider-slide" data-index="1" style="width: 308px; left: -308px; transition-duration: 0ms; transform: translate(308px, 0px) translateZ(0px);">
+
+  <div class="list card">
+	<label class="item item-checkbox ng-valid" ng-model="todo.did"><div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle"><input type="checkbox" ng-model="todo.did" class="ng-pristine ng-untouched ng-valid"><i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ng-transclude=""><span class="ng-binding">tmp</span></div></label>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name" class="ng-pristine ng-untouched ng-valid">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc" class="ng-pristine ng-untouched ng-valid">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount" class="ng-pristine ng-untouched ng-valid">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide><!-- end ngRepeat: todo in todos.today track by $index -->
+</div><div class="slider-pager"><!-- ngRepeat: slide in numSlides() track by $index --><span class="slider-pager-page active" ng-repeat="slide in numSlides() track by $index" ng-class="{active: $index == currentSlide}" ng-click="pagerClick($index)"><i class="icon ion-record"></i></span><!-- end ngRepeat: slide in numSlides() track by $index --><span class="slider-pager-page" ng-repeat="slide in numSlides() track by $index" ng-class="{active: $index == currentSlide}" ng-click="pagerClick($index)"><i class="icon ion-record"></i></span><!-- end ngRepeat: slide in numSlides() track by $index --></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class=" slider slider" on-slide-changed="slideHasChanged($index)" style="visibility: visible;">
+  <div class="slider-slides" ng-transclude="" style="width: 616px;">
+<!-- ngRepeat: todo in todos.today track by $index -->
+<ion-slide ng-repeat="todo in todos.today track by $index" class="slider-slide" data-index="0"
+style="width: 308px; left: 0px; transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+  <div class="list card">
+	<label class="item item-checkbox ng-valid" ng-model="todo.did">
+    <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+      <input type="checkbox" ng-model="todo.did" class="ng-pristine ng-untouched ng-valid">
+      <i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ng-transclude="">
+        <span class="ng-binding">travel</span></div></label>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name" class="ng-pristine ng-untouched ng-valid">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc" class="ng-pristine ng-untouched ng-valid">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount" class="ng-pristine ng-untouched ng-valid">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide><!-- end ngRepeat: todo in todos.today track by $index -->
+  <ion-slide ng-repeat="todo in todos.today track by $index" class="slider-slide" data-index="1" style="width: 308px; left: -308px; transition-duration: 0ms; transform: translate(308px, 0px) translateZ(0px);">
+
+  <div class="list card">
+	<label class="item item-checkbox ng-valid" ng-model="todo.did"><div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle"><input type="checkbox" ng-model="todo.did" class="ng-pristine ng-untouched ng-valid"><i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ng-transclude=""><span class="ng-binding">home</span></div></label>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name" class="ng-pristine ng-untouched ng-valid">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc" class="ng-pristine ng-untouched ng-valid">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount" class="ng-pristine ng-untouched ng-valid">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide><!-- end ngRepeat: todo in todos.today track by $index --><ion-slide ng-repeat="todo in todos.today track by $index" class="slider-slide">
+
+  <div class="list card">
+	<label class="item item-checkbox ng-valid" ng-model="todo.did"><div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle"><input type="checkbox" ng-model="todo.did" class="ng-pristine ng-untouched ng-valid"><i class="checkbox-icon"></i></div><div class="item-content disable-pointer-events" ng-transclude=""><span class="ng-binding">rent</span></div></label>
+  <label class="item item-input">
+      <input type="text" placeholder="Name" ng-model="todo.name" class="ng-pristine ng-untouched ng-valid">
+    </label>
+
+<label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="todo.desc" class="ng-pristine ng-untouched ng-valid">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="todo.amount" class="ng-pristine ng-untouched ng-valid">
+  </label>
+<br>
+<button type="button" class="btn btn-primary btn-xs" ng-click="saveThis(todo)">save</button>
+</div>
+  </ion-slide><!-- end ngRepeat: todo in todos.today track by $index -->
+</div><div class="slider-pager">
+  <!-- ngRepeat: slide in numSlides() track by $index -->
+  <span class="slider-pager-page active" ng-repeat="slide in numSlides() track by $index"
+  ng-class="{active: $index == currentSlide}" ng-click="pagerClick($index)">
+  <i class="icon ion-record"></i>
+</span>
+<!-- end ngRepeat: slide in numSlides() track by $index -->
+<span class="slider-pager-page"
+ng-repeat="slide in numSlides() track by $index"
+ng-class="{active: $index == currentSlide}"
+ng-click="pagerClick($index)">
+<i class="icon ion-record"></i></span>
+<!-- end ngRepeat: slide in numSlides() track by $index --></div></div>
