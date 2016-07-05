@@ -99,32 +99,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
       }
     }
   })
-  .state('tab.add-event', {
-      url: '/add-event',
-      views: {
-        'tab-planning': {
-          templateUrl: 'templates/add-event.html',
-          controller: 'addEventController'
-        }
-      }
-    })
-.state('tab.user-list', {
-      url: '/user-list',
-      views: {
-        'tab-planning': {
-          templateUrl: 'templates/user-list.html',
-          controller: 'userList'
-        }
-      }
-    })
-  
-
-  .state('tab.addIncome', {
-    url: '/addIncome',
+  .state('tab.planView', {
+    url: '/planView',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/add-income-view.html',
-        controller: 'incomeController'
+      'tab-planning': {
+        templateUrl: 'templates/planView.html',
+        controller: 'planningController'
       }
     }
   });

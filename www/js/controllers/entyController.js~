@@ -1,24 +1,16 @@
 angular.module('starter.controllers')
 
-.controller('activeTodoController', function($scope,dao,statusService,levelService,incomeService,$ionicSideMenuDelegate) {
+.controller('activeTodoController', function($scope,dao,statusService,levelService) {
   //dao.getExpToday();
-	console.log("Controller Init");
 	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
   $scope.addN=[];
 	$scope.showList="";
 	dao.loadSaved();
-	$scope.showListE=dao.showList;
-	$scope.eNumber=dao.eNumber;
-	$scope.iNumber=dao.iNumber;
-	incomeService.loadIncomeToday();
-	$scope.incomeList=incomeService.todayIncome;
-
 	console.log(dao.saved);
 	console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
 	//console.log("saved:"+$scope.saved);
-
   $scope.saveTodos=function()
 	{
 
@@ -50,7 +42,6 @@ angular.module('starter.controllers')
 	$scope.saveThis=function(itm)
 	{
 
-				console.log("Kalled");
 					dao.saveThis(itm);
 					statusService.refresh();
 	}
@@ -72,11 +63,6 @@ angular.module('starter.controllers')
 		$scope.showList="";
 		statusService.refresh();
 	}
-	$scope.cancelThisNew=function()
-	{
-		 $scope.showList="";
-		 $scope.addN=[];
-	}
 	$scope.todos.getData=function()
 	{
 		dao.getData();
@@ -86,43 +72,4 @@ angular.module('starter.controllers')
 	 info: 'Tap anywhere on the card to open the modal'
  }
 
- //Income
- $scope.saveTodayIncome=function(income)
- {
-	 console.log("saveTodayIncome");
-	 incomeService.saveTodayIncome(income);
- }
-
-
-//Watchers
-$scope.$watch(function(){
-	return dao.eNumber;
-},
-function(newVal){
-	$scope.eNumber=newVal;
-});
-$scope.$watch(function(){
-	return dao.iNumber;
-},
-function(newVal){
-	$scope.iNumber=newVal;
-});
-
-$scope.$watch(function(){
-	return incomeService.todayIncome;
-},
-function(newVal){
-	$scope.incomeList=newVal;
-});
-$scope.$watch(function(){
-	return dao.showList;
-},
-function(newVal){
-	$scope.showListE=newVal;
-});
-console.log("Controller End");
-$scope.toggleLeft = function() {
-	 $ionicSideMenuDelegate.toggleLeft();
-	 console.log("called12");
-};
 })

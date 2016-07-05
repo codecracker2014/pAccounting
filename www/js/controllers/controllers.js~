@@ -1,11 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('starter',function ($scope,dao,statusService,$ionicSlideBoxDelegate,incomeService) {
+.controller('starter',function ($scope,dao,statusService,$ionicSlideBoxDelegate) {
 	// body...
 	//$scope.dt=AppDate.getAppDate();
-
-console.log("L");
-
 	$scope.currentDate = dao.date;
 	$scope.month=month_name(dao.date.getMonth(),1);
 	$scope.level=dao.level;
@@ -22,7 +19,6 @@ console.log("L");
 			AppDate.dt=val;
 			dao.date=val;
 			dao.refresh();
-			incomeService.refresh();
 			console.log(dao.today);
 			console.log(AppDate.getAppDate());
 			console.log('Selected date is : ', val);
@@ -32,10 +28,6 @@ console.log("L");
 			console.log("Updated");
 		}
 	};
-
-
-
-
 //Start date
 	$scope.currentDate1 = statusService.startDate;
 	$scope.month1=month_name(statusService.startDate.getMonth(),1);
@@ -73,7 +65,6 @@ $scope.datePickerCallback2 = function (val) {
 	}
 };
 
-console.log("E");
 
 })
 
