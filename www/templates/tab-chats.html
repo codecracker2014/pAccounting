@@ -13,21 +13,25 @@
 
  </button>
 
- <ionic-datepicker style="padding-left:2px" date="currentDate1" min="minDate1" max="maxDate1" callback="datePickerCallback1">
-   <button class="button   " style="font-size:16px; padding:0px;padding-left:2px;padding-right:2px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate1.getDate()}} {{month1}}</button>
- </ionic-datepicker>
-<label style="padding-top:5px"> To</label>
- <ionic-datepicker style="padding-left:2px" date="currentDate2" min="minDate2" max="maxDate2" callback="datePickerCallback2">
-   <button class="button   " style="font-size:16px; padding:0px;padding-left:2px;padding-right:2px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate2.getDate()}} {{month2}}</button>
- </ionic-datepicker>
-
 </ion-nav-buttons>
   <ion-content class="has-header">
-    <div class="{{level1Hide}}">
+    <div class="card">
+      <onezone-datepicker datepicker-object="onezoneDatepicker1">
+            <button class="button button-block button-outline button-positive show-onezone-datepicker">
+              From {{onezoneDatepicker1.date | date:'dd MMMM yyyy'}}
+            </button>
+        </onezone-datepicker>
+        <onezone-datepicker datepicker-object="onezoneDatepicker2">
+          <button class="button button-block button-outline button-positive show-onezone-datepicker">
+            To {{onezoneDatepicker2.date | date:'dd MMMM yyyy'}}
+          </button>
+      </onezone-datepicker>
+</div>
+    <div class="{{level1Hide}}" >
+
     <ion-list>
 
-      <div class="list card " >
-
+      <div class="list card " style="z-index:-4">
         <div class="item {{hideTotals}}" >
           Effective income: {{status.totalI-status.total}}
           <div class="item item-divider">Totals</div>

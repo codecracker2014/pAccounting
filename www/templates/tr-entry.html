@@ -12,11 +12,15 @@
 </ion-nav-bar>
 
   <ion-content class="padding">
-
-    <ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
+    <onezone-datepicker datepicker-object="onezoneDatepicker">
+        <button class="button button-block button-outline button-positive show-onezone-datepicker">
+            {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
+        </button>
+    </onezone-datepicker>
+<!--    <ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
       <button class="button   button-block" style="font-size:26px; padding:10px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate.getDate()}} {{month}}</button>
     </ionic-datepicker>
-
+-->
 
     <div class="list card" ng-repeat="todo in addN">
   <!--
