@@ -1,0 +1,84 @@
+<ion-view title="Income" >
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
+  <ion-nav-buttons side="left" >
+<!--    <a class="button button-icon icon-left ion-ios-arrow-back" href="#/tab/account"> Expense </a>-->
+
+</ion-nav-buttons>
+Income
+<ion-nav-buttons side="right" >
+<button class="button button-outline" style="color:white" ng-click="show()">
+  {{level}}
+</button>
+
+</ion-nav-buttons>
+
+  <ion-content >
+<center>
+<button class="button button-icon icon ion-plus-circled balanced" ng-click="openForm()" ></button>
+</center>
+<div class="list list-inset {{showForm}}"  >
+  <form name="inForm" novalidate>
+  <label class="item item-input">
+    <input type="text" placeholder="Name" ng-model="income.name" required>
+  </label>
+  <label class="item item-input">
+    <input type="text" placeholder="Description" ng-model="income.desc">
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Amount" ng-model="income.amount" required>
+  </label>
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Type
+    </div>
+    <select ng-model="income.type" required>
+      <option selected>Monthly</option>
+      <option >Daily</option>
+    </select>
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Date" min=1 max=31 ng-model="income.date">
+  </label>
+  <br>
+  <button class="button  {{button_type}} button-balanced" ng-disabled="inForm.$invalid" ng-click="save(income)">
+  Save
+  </button>
+  <button class="button  button-small button-assertive {{button_show}}" ng-disabled="inForm.$invalid" ng-click="delete(income)">
+  delete
+  </button>
+  <button class="button  button-small button-calm {{button_show}}" ng-disabled="inForm.$invalid" ng-click="cancel()">
+  cancel
+  </button>
+
+</form>
+
+</div>
+<!--List of income  -->
+<div class="list card {{incomeList.showTable}}">
+<table class="table table-condensed " >
+  <thead >
+    <tr class="info">
+
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="itm in incomeList" ng-click="update(itm)" >
+      <td  >{{itm.name}}</td>
+      <td >{{itm.desc}}</td>
+      <td >{{itm.amount}}</td>
+      <td >{{itm.type}}</td>
+      <td >{{itm.date}}</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+  </ion-content>
+</ion-view>

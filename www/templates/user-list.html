@@ -1,0 +1,38 @@
+
+<ion-view view-title="Connections">
+     <ion-nav-back-button>
+      </ion-nav-back-button>
+  <ion-content class="padding">
+<button class="button button-full button-positive" ng-click="showAddContact()">
+ + Add new contact
+</button>
+<div class="list {{addContactFlag}}" >
+<form name="addUserForm">
+  <label class="item item-input">
+    <input type="text" placeholder="Name" ng-model="contact.name" required="true" ng-minlength=1>
+  </label>
+  <label class="item item-input">
+    <input type="number" placeholder="Mobile" ng-model="contact.mob" required="true" ng-minlength=10 ng-maxlength=10>
+  </label>
+<button class="button button-full button-positive" ng-click="addContact()" ng-disabled="addUserForm.$invalid">
+{{actn}}
+</button>
+</form>
+</div>
+<label class="item item-input" ng-show={{contacts.length}}>
+  <input type="text" placeholder="Search" ng-model="searchKey">
+</label>
+ <ion-list>
+  <ion-item ng-repeat="contact in contacts | filter:searchKey">
+    <b>{{contact.name}}</b>
+
+    <a class="button button-icon icon ion-trash-a " style="float:right" ng-click="delete({{$index}})"></a>
+    <a class="button button-icon icon ion-settings " style="float:right" ng-click="edit(contact,$index)"></a>
+    <br> {{contact.mob}}
+
+
+
+  </ion-item>
+</ion-list>
+  </ion-content>
+</ion-view>

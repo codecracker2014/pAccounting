@@ -1,0 +1,53 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="Add Event">
+     <ion-nav-back-button>
+      </ion-nav-back-button>
+  <ion-content class="padding">
+ <div class="list">
+  <label class="item item-input">
+    <input type="text" placeholder="Name">
+  </label>
+  <label class="item item-input">
+    <input type="text" placeholder="Place">
+  </label>
+</div>
+
+<div class="list">
++ Transaction
+ <label class="item item-input">
+   <input type="text" placeholder="Description">
+ </label>
+ </div>
+ <div class="card row">
+
+   <div class="card col positive" style="width:40%; float:left">
+     Payers
+     <a class="button button-icon icon ion-plus-circled positive" style="float:right" ng-click="selectPayers()"></a>
+
+     <label class="item item-input" ng-repeat='itm in Newtr.payers'>
+       {{itm.name}}, {{itm.amount}}
+     </label>
+
+   </div>
+   <div class="col col-10"><center>
+  <a class="button button-small icon ion-checkmark" style="width:5%"></a></center>
+</div>
+   <div class="card positive col" style="width:40%; float:right">
+     Partners
+     <a class="button button-icon icon ion-plus-circled positive" style="float:right" ng-click="selectPartners()"></a>
+
+          <label class="item item-input" ng-repeat='itm in Newtr.borrowers'>
+            {{itm.name}}, {{itm.amount}}
+          </label>
+   </div>
+
+
+ </div>
+
+  </ion-content>
+</ion-view>

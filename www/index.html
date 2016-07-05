@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -16,20 +17,46 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <script src="lib/ng-Cordova/js/ng-cordova.min.js"></script>
+
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/services.js"></script>
-    <script src = "js/func.js"></script>
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/controllers/configController.js"></script>
+    <script src="js/controllers/statusController.js"></script>
+    <script src="js/controllers/entyController.js"></script>
+    <script src="js/controllers/levelController.js"></script>
+    <script src="js/controllers/planningController.js"></script>
+    <script src="js/controllers/incomeController.js"></script>
+    <script src="js/controllers/NotificationController.js"></script>
+    <script src="js/controllers/addEventController.js"></script>
+    <script src="js/controllers/userList.js"></script>
+
+    <script src="js/services/services.js"></script>
+    <script src="js/services/dao.js"></script>
+    <script src="js/services/statusService.js"></script>
+    <script src="js/services/levelService.js"></script>
+    <script src="js/services/planningService.js"></script>
+    <script src="js/services/notificationService.js"></script>
+    <script src="js/services/incomeService.js"></script>
+     <script src="js/services/contactService.js"></script>
+     <script src="js/services/trEventService.js"></script>
+    <script src = "js/functions/func.js"></script>
 
     <!-- add bootstrap-->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <script src="lib/bootstrap/js/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- pdf export plugin -->
+  <!--   <script type="text/javascript" src="lib/jsPDF-1.2.60/dist/jspdf.min.js" />
+   <script type="text/javascript" src="lib/exportPdf/js/jspdf.js" />
+    <script type="text/javascript" src="lib/exportPdf/js/base64.js" />
+-->
     <!-- chart js-->
+
+
     <script type="text/javascript" src="lib/chart/js/canvasjs.min.js"></script>
 
 
@@ -40,31 +67,39 @@
 <script src="lib/datepicker/templates.min.js"></script>
 <script src="lib/datepicker/ionic-datepicker.min.js"></script>
 <style>
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.button-round{
+  border: 1px solid #a1a1a1;
+
+
+      width: 50px;
+      border-radius: 25px;
+}
 
 </style>
+
   </head>
+
   <body ng-app="starter" ng-controller="starter">
-    <!--
-      The nav bar that will be updated as we navigate between views.
-    -->
 
     <ion-nav-bar class="bar-stable">
+
     </ion-nav-bar>
-<!--
-    <div class="bar bar-header">
-      <button class="button icon ion-navicon"></button>
-      <button class="button">Edit</button>
-    </div>
--->
 
-
-    <!--
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
     <ion-nav-view>
     </ion-nav-view>
-
-  </body>
+ </body>
 </html>

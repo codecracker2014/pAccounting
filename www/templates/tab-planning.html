@@ -1,0 +1,52 @@
+
+<ion-view view-title="Your money flows">
+
+
+<div class="bar bar-header bar-positive">
+  <h1 class="title">bar-positive</h1>
+</div>
+<ion-side-menus style="margin-top:44px" >
+  <!-- Left menu -->
+  <ion-side-menu side="left">
+<div class="list">
+
+  <a class="item item-icon-left" href="#/tab/add-event">
+    <i class="icon ion-ios-cart"></i>
+    Add even
+  </a>
+  <a class="item item-icon-left" href="#/tab/user-list">
+    <i class="icon ion-person-stalker"></i>
+    Your connections
+
+  </a>
+
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-social-usd"></i>
+    Lend money
+
+  </a>
+
+</div>
+
+  </ion-side-menu>
+  <ion-side-menu-content edge-drag-threshold="true"
+  drag-content="true">
+  <!-- Main content, usually <ion-nav-view> -->
+
+
+  </ion-side-menu-content>
+
+</ion-side-menus>
+
+  <ion-nav-bar class="bar-dark">
+        <ion-nav-buttons side="left">
+   <!-- Toggle left side menu -->
+   <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></button>
+  </ion-nav-buttons>
+  <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
+
+
+<ion-content>
+  </ion-content>
+</ion-view>

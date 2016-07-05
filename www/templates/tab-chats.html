@@ -1,28 +1,56 @@
-<ion-view view-title="Statistics">
-  <ion-content>
+<ion-view>
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button></ion-nav-back-button>
+
+</ion-nav-bar>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-outline" style="color:white;" ng-click="showLevel()">
+      {{level}}
+    </button>
+
+ <button class="button ion-pie-graph button-positive icon-right" ng-click="show()">
+
+ </button>
+
+ <ionic-datepicker style="padding-left:2px" date="currentDate1" min="minDate1" max="maxDate1" callback="datePickerCallback1">
+   <button class="button   " style="font-size:16px; padding:0px;padding-left:2px;padding-right:2px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate1.getDate()}} {{month1}}</button>
+ </ionic-datepicker>
+<label style="padding-top:5px"> To</label>
+ <ionic-datepicker style="padding-left:2px" date="currentDate2" min="minDate2" max="maxDate2" callback="datePickerCallback2">
+   <button class="button   " style="font-size:16px; padding:0px;padding-left:2px;padding-right:2px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate2.getDate()}} {{month2}}</button>
+ </ionic-datepicker>
+
+</ion-nav-buttons>
+  <ion-content class="has-header">
+    <div class="{{level1Hide}}">
     <ion-list>
 
-      <div class="list card" >
-        <div class="item item-divider">
-          Expenses
+      <div class="list card " >
 
-        </div>
-        <div class="item item-divider">Totals</div>
-        <div class="item">
+        <div class="item {{hideTotals}}" >
+          Effective income: {{status.totalI-status.total}}
+          <div class="item item-divider">Totals</div>
           <table class="table table-condensed">
             <thead >
               <tr class="info">
 
                   <th>Expense</th>
                   <th>Total</th>
-                  <th>Total Transactions</th>
+                  <th>#Repeat</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="itm in status.items track by $index" >
                 <td  >{{itm}}</td>
                 <td >{{status.mStatus[itm]}}</td>
-                <td >1</td>
+                <td >{{status.fr[itm]}}</td>
+
+              </tr>
+              <tr>
+                <td >Total</td>
+                <td >{{status.total}}</td>
+                <td ></td>
 
               </tr>
 
@@ -30,44 +58,81 @@
           </table>
 
         </div>
-        <div class="item item-divider">
-          Chart
-          <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div>
-        </div>
-
-        <div class="item item-divider">
-          Others
-        </div>
-
-
-        </div>
-
-
-<!--
-      <div class="well" style="background-color:#66b2ff;color:white">Todays Status   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.date.getDate()}}</span>   <span style="width:20px;background-color:#0064cc;height:10px">{{todos.getM}}</span></div>
-      <div class="panel-group">
-        <div class="panel panel-primary">
-      	<div class="panel-heading">{{todos.getM}} Status</div>
-          <div class="panel-body">
+        <div class="item {{hideTotals}}" >
+          <div class="item item-divider">Totals</div>
           <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th ng-repeat="itm in items track by $index">{{itm}}</th>
+            <thead >
+              <tr class="info">
+
+                  <th>Income</th>
+                  <th>Total</th>
+                  <th>#Repeat</th>
               </tr>
             </thead>
             <tbody>
+              <tr ng-repeat="itm in status.itemsI track by $index" >
+                <td  >{{itm}}</td>
+                <td >{{status.mStatusI[itm]}}</td>
+                <td >{{status.frI[itm]}}</td>
+
+              </tr>
               <tr>
-                <td ng-repeat="itm in items track by $index">{{mStatus[itm]}}</td>
+                <td >Total</td>
+                <td >{{status.totalI}}</td>
+                <td ></td>
 
               </tr>
 
             </tbody>
           </table>
 
-
-      	</div>
         </div>
--->
+
+        <div class="item item-divider {{hideChart}}">
+          Expense
+          <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div>
+        </div>
+        <div class="item item-divider {{hideChart}}">
+          Income
+          <div id="chartContainerI" style="height: {{height}}; width: {{width}};"></div>
+        </div>
+
+        <div class="item item-divider {{hideHistogram}}">
+Histogram
+
+        </div>
+
+
+        </div>
     </ion-list>
+  </div>
+  <div class="{{levelHide}}" ng-controller="levelController">
+    <table class="table table-condensed">
+      <thead >
+        <tr class="info">
+
+            <th>Expense</th>
+            <th>Total</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="itm in currentData.currentItems track by $index" >
+          <td  >{{itm}}</td>
+          <td >{{currentData.currentList[itm]}}</td>
+
+
+        </tr>
+        <tr>
+          <td >Total</td>
+          <td >{{currentData.total}}</td>
+          <td ></td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
   </ion-content>
 </ion-view>

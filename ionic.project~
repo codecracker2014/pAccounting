@@ -5,10 +5,6 @@
     {
       "path": "/register",
       "proxyUrl": "http://localhost:8080/paccounting/register"
-    },
-  {
-      "path": "/getnot",
-      "proxyUrl": "http://localhost:8080/paccounting/getnot"
     }
   ]
 }
