@@ -127,6 +127,7 @@ function keyEquals(key1,key2)
         return false;
 
       }
+<<<<<<< HEAD:www/js/functions/func.js
 
     }
   }
@@ -165,12 +166,53 @@ function getD(key)
 
 
 
+=======
+
+    }
+  }
+}
+
+function getYear(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(3,2);
+  }
+  else {
+    return key.substr(4,2);
+  }
+}
+function getM(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(1,2);
+  }
+  else {
+    return key.substr(2,2);
+  }
+}
+function getD(key)
+{
+  if(key.length==5)
+  {
+    return key.substr(0,1);
+  }
+  else {
+    return key.substr(0,2);
+  }
+}
+
+
+
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18:www/js/func.js
 function filterKeys(keys,startDate,endDate)
 {
   var tmp=[];
   var stKey=getKey(startDate);
   var endKey=getKey(endDate);
 //  console.log("keys:"+keys+"stkey "+stKey);
+<<<<<<< HEAD:www/js/functions/func.js
   flag=false;
   
   for(i=0;i<keys.length;i++)
@@ -189,6 +231,13 @@ function filterKeys(keys,startDate,endDate)
         console.log("Found I");
         keys[i]="i"+keys[i];
       }
+=======
+  for(i=0;i<keys.length;i++)
+  {
+  //  console.log("keys[i]"+keys[i]+"stKey"+stKey);
+    if((keyEquals(keys[i],stKey)||(keys[i]==stKey))&&(keyEquals(endKey,keys[i])||(keys[i]==endKey)))
+    {
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18:www/js/func.js
       tmp.push(keys[i]);
     }
   }

@@ -1,14 +1,20 @@
 angular.module('starter.controllers')
 
+<<<<<<< HEAD
 .controller('activeTodoController', function($scope,dao,statusService,levelService,incomeService,$ionicSideMenuDelegate) {
   //dao.getExpToday();
 	console.log("Controller Init");
+=======
+.controller('activeTodoController', function($scope,dao,statusService,levelService) {
+  //dao.getExpToday();
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
   $scope.addN=[];
 	$scope.showList="";
 	dao.loadSaved();
+<<<<<<< HEAD
 	$scope.showListE=dao.showList;
 	$scope.eNumber=dao.eNumber;
 	$scope.iNumber=dao.iNumber;
@@ -19,6 +25,11 @@ angular.module('starter.controllers')
 	console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
 	//console.log("saved:"+$scope.saved);
 
+=======
+	console.log(dao.saved);
+	console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
+	//console.log("saved:"+$scope.saved);
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   $scope.saveTodos=function()
 	{
 
@@ -50,7 +61,10 @@ angular.module('starter.controllers')
 	$scope.saveThis=function(itm)
 	{
 
+<<<<<<< HEAD
 				console.log("Kalled");
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 					dao.saveThis(itm);
 					statusService.refresh();
 	}
@@ -72,11 +86,14 @@ angular.module('starter.controllers')
 		$scope.showList="";
 		statusService.refresh();
 	}
+<<<<<<< HEAD
 	$scope.cancelThisNew=function()
 	{
 		 $scope.showList="";
 		 $scope.addN=[];
 	}
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 	$scope.todos.getData=function()
 	{
 		dao.getData();
@@ -86,6 +103,7 @@ angular.module('starter.controllers')
 	 info: 'Tap anywhere on the card to open the modal'
  }
 
+<<<<<<< HEAD
  //Income
  $scope.saveTodayIncome=function(income)
  {
@@ -125,4 +143,7 @@ $scope.toggleLeft = function() {
 	 $ionicSideMenuDelegate.toggleLeft();
 	 console.log("called12");
 };
+=======
+
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 })

@@ -13,8 +13,11 @@ angular.module('starter.services')
   this.levels=[];
   this.catList=[];
   this.groups=[];
+<<<<<<< HEAD:www/js/services/dao.js
   this.itmList=[];
   this.itmListI=[];
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18:www/js/services.js
   this.updateLevel=function(index)
   {
       if(index!=null)
@@ -53,7 +56,44 @@ angular.module('starter.services')
 
   }
 
+<<<<<<< HEAD:www/js/services/dao.js
 
+=======
+  this.getExpList=function()
+  {
+    //console.log("i m");
+    if(this.level=="Level-2")
+    {
+      //console.log("hi");
+      var lst=[];
+      var etmp=JSON.parse(localStorage.getItem("eTemplets"));
+      if(etmp!=null)
+      {  for(var i=0;i<etmp.length;i++)
+        {
+          lst.push(etmp[i].name);
+        }
+      }
+      return lst;
+    }
+    else {
+
+      var lst=[];
+      var t=this.level.charAt(6);
+      t--;
+      level="Level-"+t;
+      console.log(level+"-cat");
+      var etmp=JSON.parse(localStorage.getItem(level+"-cat"));
+      if(etmp!=null)
+      {
+          lst=etmp;
+      }
+
+      return lst;
+    }
+
+    //this.=JSON.parse(localStorage.getItem("levels"));
+  }
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18:www/js/services.js
   this.addNewExp=function(cat,itm)
   {
       list=JSON.parse(localStorage.getItem(this.level+cat));
@@ -426,3 +466,85 @@ this.showAlert=function(title,message)
 }
 
 })
+<<<<<<< HEAD:www/js/services/dao.js
+=======
+
+
+.service('statusService', function(dao){
+		this.items=[];
+    this.dataPoints=[];
+    this.mStatus=[];
+    this.total=0;
+    this.width="300px";
+    this.height="100%";
+    this.fr=[];
+    this.startDate=new Date();
+    this.startDate.setDate(1);
+    this.endDate=new Date();
+
+		this.monthlyStatus=function()
+		{
+			var st=[];
+
+//      console.log("st"+st);
+			var keys=JSON.parse(localStorage.getItem("keys"));
+      keys=filterKeys(keys,this.startDate,this.endDate);
+      this.total=0;
+      for(var i=0;i<keys.length;i++)
+			{
+				var logs=JSON.parse(localStorage.getItem(keys[i]));
+
+
+				for(var j=0;j<logs.length;j++)
+				{
+          if(this.items.indexOf(logs[j].name)==-1)
+          this.items.push(logs[j].name);
+
+          if(st[logs[j].name]==null)
+          {
+              st[logs[j].name]=0;
+          }
+					st[logs[j].name]=parseInt(st[logs[j].name])+parseInt(logs[j].amount);
+          this.total=this.total+parseInt(logs[j].amount);
+          if(this.fr[logs[j].name]!=null)
+              this.fr[logs[j].name]=parseInt(this.fr[logs[j].name])+1;
+          else {
+            this.fr[logs[j].name]=1;
+          }
+				}
+			}
+      for(var i=0;i<this.items.length;i++)
+      {
+            var obj={};
+//            console.log(this.items[i]);
+          this.dataPoints.push({y:st[this.items[i]],indexLabel:this.items[i]});
+      }
+      this.width="300px";
+      this.height="100%";
+      console.log("points"+this.dataPoints);
+      createChart("Expense chart",this.dataPoints);
+      this.width="300px";
+      this.height="100%";
+			this.mStatus= st;
+
+    }
+    this.refresh=function()
+    {
+      console.log("Refreshing");
+      this.items=[];
+      this.dataPoints=[];
+      this.mStatus=[];
+      try{
+      this.monthlyStatus();
+    }catch(err){
+      this.items=[];
+      this.dataPoints=[];
+      this.mStatus=[];
+
+    }
+      dao.loadSaved();
+      console.log("p:"+this.dataPoints);
+    //  createChart("Expense chart",this.dataPoints);
+    }
+})
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18:www/js/services.js

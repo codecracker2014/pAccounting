@@ -1,5 +1,9 @@
 <ion-view>
+<<<<<<< HEAD
   <ion-nav-bar class="bar-positive">
+=======
+  <ion-nav-bar class="bar-dark">
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   <ion-nav-back-button></ion-nav-back-button>
 
 </ion-nav-bar>
@@ -29,7 +33,10 @@
       <div class="list card " >
 
         <div class="item {{hideTotals}}" >
+<<<<<<< HEAD
           Effective income: {{status.totalI-status.total}}
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
           <div class="item item-divider">Totals</div>
           <table class="table table-condensed">
             <thead >
@@ -58,6 +65,7 @@
           </table>
 
         </div>
+<<<<<<< HEAD
         <div class="item {{hideTotals}}" >
           <div class="item item-divider">Totals</div>
           <table class="table table-condensed">
@@ -80,12 +88,44 @@
                 <td >Total</td>
                 <td >{{status.totalI}}</td>
                 <td ></td>
+=======
+        <div class="item item-divider {{hideChart}}">
+          Chart
+          <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div>
+        </div>
+        <div class="item item-divider {{hideHistogram}}">
+Histogram
 
-              </tr>
+        </div>
 
-            </tbody>
-          </table>
 
+        </div>
+    </ion-list>
+  </div>
+  <div class="{{levelHide}}" ng-controller="levelController">
+    <table class="table table-condensed">
+      <thead >
+        <tr class="info">
+
+            <th>Expense</th>
+            <th>Total</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="itm in currentData.currentItems track by $index" >
+          <td  >{{itm}}</td>
+          <td >{{currentData.currentList[itm]}}</td>
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
+
+
+        </tr>
+        <tr>
+          <td >Total</td>
+          <td >{{currentData.total}}</td>
+          <td ></td>
+
+<<<<<<< HEAD
         </div>
 
         <div class="item item-divider {{hideChart}}">
@@ -130,6 +170,10 @@ Histogram
 
         </tr>
 
+=======
+        </tr>
+
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
       </tbody>
     </table>
 

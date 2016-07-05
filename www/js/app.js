@@ -84,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+        templateUrl: 'templates/tab-setting.html',
         controller: 'configController'
       }
     }
@@ -99,6 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
       }
     }
   })
+<<<<<<< HEAD
   .state('tab.add-event', {
       url: '/add-event',
       views: {
@@ -125,12 +126,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
       'tab-account': {
         templateUrl: 'templates/add-income-view.html',
         controller: 'incomeController'
+=======
+  
+  .state('tab.planView', {
+    url: '/planView',
+    views: {
+      'tab-planning': {
+        templateUrl: 'templates/planView.html',
+        controller: 'planningController'
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
       }
     }
   });
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 

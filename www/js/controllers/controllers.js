@@ -1,11 +1,17 @@
 angular.module('starter.controllers', [])
 
+<<<<<<< HEAD
 .controller('starter',function ($scope,dao,statusService,$ionicSlideBoxDelegate,incomeService) {
 	// body...
 	//$scope.dt=AppDate.getAppDate();
 
 console.log("L");
 
+=======
+.controller('starter',function ($scope,dao,statusService,$ionicSlideBoxDelegate) {
+	// body...
+	//$scope.dt=AppDate.getAppDate();
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 	$scope.currentDate = dao.date;
 	$scope.month=month_name(dao.date.getMonth(),1);
 	$scope.level=dao.level;
@@ -22,7 +28,10 @@ console.log("L");
 			AppDate.dt=val;
 			dao.date=val;
 			dao.refresh();
+<<<<<<< HEAD
 			incomeService.refresh();
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 			console.log(dao.today);
 			console.log(AppDate.getAppDate());
 			console.log('Selected date is : ', val);
@@ -32,10 +41,13 @@ console.log("L");
 			console.log("Updated");
 		}
 	};
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 //Start date
 	$scope.currentDate1 = statusService.startDate;
 	$scope.month1=month_name(statusService.startDate.getMonth(),1);
@@ -73,7 +85,11 @@ $scope.datePickerCallback2 = function (val) {
 	}
 };
 
+<<<<<<< HEAD
 console.log("E");
+=======
+
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
 
 })
 

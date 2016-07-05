@@ -1,11 +1,18 @@
 angular.module('starter.controllers')
 
+<<<<<<< HEAD
 .controller('statusController', function($scope,dao,statusService,$ionicActionSheet,$timeout,levelService,incomeService) {
+=======
+.controller('statusController', function($scope,dao,statusService,$ionicActionSheet,$timeout,levelService) {
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   $scope.todos=[];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
 	statusService.monthlyStatus();
+<<<<<<< HEAD
   statusService.monthlyStatusI();
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   $scope.mStatus=statusService.mStatus;
   $scope.items=statusService.items;
 	$scope.status=statusService;
@@ -16,6 +23,10 @@ angular.module('starter.controllers')
 	$scope.hideHistogram="ng-hide";
   $scope.leve1Hide="";
   $scope.levelHide="ng-hide";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
   console.log("Status");
 
 	$scope.show = function() {

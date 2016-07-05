@@ -2,6 +2,7 @@ angular.module('starter.services')
 
 .service('statusService', function(dao){
 		this.items=[];
+<<<<<<< HEAD
 		this.itemsI=[];
     this.dataPoints=[];
 		this.dataPointsI=[];
@@ -13,6 +14,14 @@ angular.module('starter.services')
     this.height="100%";
     this.fr=[];
 		this.frI=[];
+=======
+    this.dataPoints=[];
+    this.mStatus=[];
+    this.total=0;
+    this.width="300px";
+    this.height="100%";
+    this.fr=[];
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
     this.startDate=new Date();
     this.startDate.setDate(1);
     this.endDate=new Date();
@@ -23,11 +32,15 @@ angular.module('starter.services')
 
 //      console.log("st"+st);
 			var keys=JSON.parse(localStorage.getItem("keys"));
+<<<<<<< HEAD
 			if(keys!=null)
       keys=filterKeys(keys,this.startDate,this.endDate);
 			else {
 				return;
 			}
+=======
+      keys=filterKeys(keys,this.startDate,this.endDate);
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
       this.total=0;
 			this.fr=[];
       for(var i=0;i<keys.length;i++)
@@ -59,14 +72,22 @@ angular.module('starter.services')
 //            console.log(this.items[i]);
           this.dataPoints.push({y:st[this.items[i]],indexLabel:this.items[i]});
       }
+<<<<<<< HEAD
 			this.width="300px";idth="300px";
       this.height="100%";
       console.log("points"+this.dataPoints);
       createChart("chartContainer","Expense chart",this.dataPoints);
+=======
+      this.width="300px";
+      this.height="100%";
+      console.log("points"+this.dataPoints);
+      createChart("Expense chart",this.dataPoints);
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
       this.width="300px";
       this.height="100%";
 			this.mStatus= st;
 			dao.itmList=this.items;
+<<<<<<< HEAD
 		}
 		this.monthlyStatusI=function()
 		{
@@ -119,6 +140,8 @@ angular.module('starter.services')
       this.height="100%";
 			this.mStatusI= st;
 			dao.itmListI=this.itemsI;
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
     }
     this.refresh=function()
     {
@@ -128,7 +151,10 @@ angular.module('starter.services')
       this.mStatus=[];
       try{
       this.monthlyStatus();
+<<<<<<< HEAD
 			this.monthlyStatusI();
+=======
+>>>>>>> 64cfcf48d717ff02916c9f4570b85c864e521c18
     }catch(err){
       this.items=[];
       this.dataPoints=[];
