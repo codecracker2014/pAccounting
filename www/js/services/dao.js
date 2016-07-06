@@ -8,13 +8,15 @@ angular.module('starter.services')
   this.showList="ng-hide";
   this.date=new Date();
   this.data.months=["jan"];
-  this.saved=[];
+  this.savedExpense=[];
+  this.savedIncome=[];
   this.level="Level-1";
   this.levels=[];
   this.catList=[];
   this.groups=[];
   this.itmList=[];
   this.itmListI=[];
+  this.addN=null;
   this.updateLevel=function(index)
   {
       if(index!=null)
@@ -144,16 +146,8 @@ angular.module('starter.services')
 
     var key=getKey(this.date);
     var key2="i"+key;
-    this.saved=JSON.parse(localStorage.getItem(key));
-    if(this.saved!=null)
-    {
-      saved=JSON.parse(localStorage.getItem(key2));
-      if(saved!=null)
-      for(i=0;i<saved.length;i++)
-      {
-        this.saved.push(saved[i]);
-      }
-    }
+    this.savedExpense=JSON.parse(localStorage.getItem(key));
+    this.savedIncome=JSON.parse(localStorage.getItem(key2));
 
   }
   this.loadData=function(limit)
@@ -377,8 +371,6 @@ console.log("Loading dao");
        this.saveToDB(key,oldTodos);
        return;
      }
-    if(itm.did==true)
-     {
         console.log("save");
         var flag=false;
         if(oldTodos!=null)
@@ -397,13 +389,6 @@ console.log("Loading dao");
           oldTodos.push(itm);
         }
         this.saveToDB(key,oldTodos);
-     }
-     else
-     {
-       this.showAlert("Save Expense","Please select Expense to save");
-       console.log("Delete");
-     }
-    // this.loadSaved();
    }
    this.deleteThis=function()
    {
@@ -426,4 +411,3 @@ this.showAlert=function(title,message)
 }
 
 })
-

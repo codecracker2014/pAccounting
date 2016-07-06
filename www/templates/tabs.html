@@ -9,7 +9,12 @@ navigation history that also transitions its views in and out.
 
   <ion-tab title="Transactions" icon-off="ion-ios-shuffle" icon-on="ion-ios-shuffle-strong" href="#/tab/dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
+    <button class="button button-float" ng-controller="activeTodoController" ng-click="addNew()">
+            <i class="icon ion-plus"></i>
+    </button>
+
   </ion-tab>
+
 
   <!-- Chats Tab -->
   <ion-tab title="Statistics" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/chats">

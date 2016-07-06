@@ -6,7 +6,6 @@ angular.module('starter.controllers')
 	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
-  $scope.addN=[];
 	$scope.showList="";
 	dao.loadSaved();
 	$scope.showListE=dao.showList;
@@ -14,8 +13,8 @@ angular.module('starter.controllers')
 	$scope.iNumber=dao.iNumber;
 	incomeService.loadIncomeToday();
 	$scope.incomeList=incomeService.todayIncome;
-
-	console.log(dao.saved);
+  $scope.inputType={'type':"Expense"};//1==expense && 0= input
+	console.log(dao.savedExpense);
 	console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
 	//console.log("saved:"+$scope.saved);
 
@@ -60,22 +59,27 @@ angular.module('starter.controllers')
 		//$scope.openModal();showList
 		$scope.showList="ng-hide";
 		console.log("i was callred");
-     var tmp={did:true,name:'',desc:'',amount:0};
-     $scope.addN.push(tmp);
-
- 	}
+     dao.addN={did:true,name:'',desc:'',amount:0};
+}
 	$scope.saveThisNew=function(itm)
 	{
+		if($scope.inputType.type=="Expense")
+		{
+			dao.saveThis(itm);
+			$scope.addN=[];
+			$scope.showList="";
+			statusService.refresh();
+		}
+		else if($scope.inputType.type=="Income")
+		{
+			$scope.saveTodayIncome(itm);
 
-		dao.saveThis(itm);
-		$scope.addN=[];
-		$scope.showList="";
-		statusService.refresh();
+		}
 	}
 	$scope.cancelThisNew=function()
 	{
 		 $scope.showList="";
-		 $scope.addN=[];
+		 dao.addN=null;
 	}
 	$scope.todos.getData=function()
 	{
@@ -91,6 +95,7 @@ angular.module('starter.controllers')
  {
 	 console.log("saveTodayIncome");
 	 incomeService.saveTodayIncome(income);
+	 statusService.refresh();
  }
 
 
@@ -120,9 +125,21 @@ $scope.$watch(function(){
 function(newVal){
 	$scope.showListE=newVal;
 });
+
 console.log("Controller End");
 $scope.toggleLeft = function() {
 	 $ionicSideMenuDelegate.toggleLeft();
 	 console.log("called12");
 };
+})
+.filter('sumOfValue', function () {
+ return function (data, key) {
+		 if (angular.isUndefined(data) && angular.isUndefined(key))
+				 return 0;
+		 var sum = 0;
+		 angular.forEach(data,function(value){
+				 sum = sum + parseInt(value[key]);
+		 });
+		 return sum;
+ }
 })

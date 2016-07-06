@@ -17,90 +17,82 @@
             {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
         </button>
     </onezone-datepicker>
-<!--    <ionic-datepicker date="currentDate" min="minDate" max="maxDate" callback="datePickerCallback">
-      <button class="button   button-block" style="font-size:26px; padding:10px;margin-top:0px; background-color:#009688;color:white"> {{ currentDate.getDate()}} {{month}}</button>
-    </ionic-datepicker>
--->
-
-    <div class="list card" ng-repeat="todo in addN">
-  <!--
-    <div class="item item-divider"><input type="checkbox" ng-model="todo.did" />  {{todo.name}}</div>
 
 
-    <label>Acivity:</label><input class="form-control" type="text" ng-model="todo.desc">
-    <label>Amount:</label><input class="form-control" type="text" ng-model="todo.amount">
-  -->
-
-    <ion-checkbox ng-model="todo.did">
-      Default
-  </ion-checkbox>
-  <label class="item item-input">
-    <input type="text" placeholder="Name" ng-model="todo.name">
-  </label>
-  <label class="item item-input">
-      <input type="text" placeholder="Description" ng-model="todo.desc">
-    </label>
+    <div class="list card {{todos.addN==null?'ng-hide':''}}">
     <label class="item item-input">
-      <input type="number" placeholder="Amount" ng-model="todo.amount">
+    <input type="text" placeholder="Name" ng-model="todos.addN.name">
+  </label>
+  <label class="item item-input item-select">
+      <div class="input-label">
+        Type
+      </div>
+      <select ng-model="inputType.type">
+        <option >Income</option>
+        <option selected >Expense</option>
+      </select>
+    </label>
+  <label class="item item-input">
+      <input type="number" placeholder="Amount" ng-model="todos.addN.amount">
     </label>
     <br>
-  <button type="button" class="btn btn-primary btn-xs" ng-click="saveThisNew(todo)">save</button>
+  <button type="button" class="btn btn-primary btn-xs" ng-click="saveThisNew(todos.addN)">save</button>
   <button type="button" class="btn btn-primary btn-xs" ng-click="cancelThisNew()">cancel</button>
     </div>
+    <div >
+    <!-- daily inputs Reminders-->
+<div class="{{(incomeList.length==0)&&(todos.today.length==0)?'ng-hide':''}}">
 
-
-    <div class="{{showListE}}">
-    <div class="card " style="padding:0px;margin:0px;">
-      Expenses
-      <button type="button" class="btn btn-primary btn-xs" ng-click="addNew()" style="float:right">+ New</button>
-
+    <div class="bar bar-calm"  style="position: inherit;height:44px; width:100%;">
+              <h1 class="title" >  Reminders</h1>
     </div>
-    <!-- daily inputs-->
+<table class="table table-condensed ">
 
-<div class="list list-inset">
+  <thead >
 
-    <div class="row item" ng-repeat="todo in todos.today track by $index">
-       <div class="input-label col-40">
-            {{todo.name}}
-          </div>
+    <tr class="positive">
 
-<input  type="number" placeholder="Amount" class="col-50" ng-model="todo.amount" />
-<button class="button button-small button-stable " ng-click="saveThis(todo)" style="margin-top:0px">
-  save
-</button>
-    </div>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="itm in incomeList track by $index" ng-click="update(itm)"  class="royal {{incomeList.show}}">
+      <td  >{{itm.name}}</td>
+      <td ><span class="primary">Income<span></td>
+      <td ><input  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
+      <td ><button class="button button-small button-positive " ng-click="saveTodayIncome(itm)" style="padding-top:0px;padding-bottom:0px;margin:0px;float:right">
+      save
+      </button></td>
+    </tr>
+    <tr ng-repeat="itm in todos.today track by $index" ng-click="update(itm)" class="royal {{showListE}}">
+      <td  >{{itm.name}}</td>
+      <td ><span class="primary">Expense<span></td>
+        <td ><input  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
+        <td ><button class="button button-small button-positive" ng-click="saveThis(itm)" style="padding-top:0px;padding-bottom:0px;margin:0px;float:right">
+          save
+        </button>
+</td>
+    </tr>
+
+  </tbody>
+</table>
+
 </div>
-</div>
-<div class="{{incomeList.show}}">
-<div class="card" style="padding:0px;margin:0px;">
-Income
-</div>
-<div class="list list-inset">
-  <div class="row item" ng-repeat="todo in incomeList track by $index">
-     <div class="input-label col-40">
-          {{todo.name}}
-      </div>
 
-  <input  type="number" placeholder="Amount" class="col-50" ng-model="todo.amount" />
-  <button class="button button-small button-stable " ng-click="saveTodayIncome(todo)" style="margin-top:0px">
-  save
-  </button>
-  </div>
-</div>
-</div>
-
-
-</div>
-
-
-<div class="{{todos.saved==null?'ng-hide':''}}">
-  <div class="card" style="padding:0px;margin:0px;">
-  Saved
+<br>
+<div class="{{((todos.savedIncome==null)&&(todos.savedExpense==null))?'ng-hide':''}}">
+  <div class="bar bar-balanced"  style="position: inherit;height:44px; width:100%;">
+            <h1 class="title" >  Saved Records</h1>
   </div>
 
-  <table class="table table-condensed">
+  <table class="table table-condensed ">
+
     <thead >
-      <tr class="info">
+
+      <tr class="positive">
 
           <th>Name</th>
           <th>Type</th>
@@ -108,31 +100,34 @@ Income
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="itm in todos.saved track by $index" ng-click="update(itm)" >
+      <tr ng-repeat="itm in resultValue=(todos.savedExpense) track by $index" ng-click="update(itm)" class="royal">
         <td  >{{itm.name}}</td>
-        <td >{{itm.desc}}</td>
+        <td ><span class="primary">Expense<span></td>
         <td >{{itm.amount}}</td>
+      </tr>
+      <tr class="calm info {{todos.savedExpense==null?'ng-hide':''}}" >
+        <td  >Total</td>
+        <td >Expense</td>
+        <td >{{resultValue | sumOfValue:'amount'}}</td>
+      </tr>
+      <tr ng-repeat="itm in totalIncome=(todos.savedIncome) track by $index" ng-click="update(itm)" class="royal">
+        <td  >{{itm.name}}</td>
+        <td ><span class="primary">Income<span></td>
+        <td >{{itm.amount}}</td>
+      </tr>
+      <tr class="calm info {{todos.savedIncome==null?'ng-hide':''}}">
+        <td  >Total</td>
+        <td >Income</td>
+        <td >{{totalIncome | sumOfValue:'amount'}}</td>
       </tr>
 
     </tbody>
   </table>
+  <div colspan='3' class="col-lg-8 text-right">
 
 </div>
+</div>
+
   </ion-content>
 
 </ion-view>
-<!--
-
-<ion-side-menus>
-
-<ion-side-menu>side = "left">
-  <h1>SIde Menu</h1>
-</ion-side-menu>
-
-<ion-side-menu-content>
-  <ion-nav-view>
-  </ion-nav-view>
-</ion-side-menu-content>
-
-</ion-side-menus>
--->
