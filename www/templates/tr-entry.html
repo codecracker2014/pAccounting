@@ -1,6 +1,6 @@
 
 
-<ion-view view-title="Today's Transactions">
+<ion-view view-title="">
   <ion-nav-bar class="bar-positive">
   <ion-nav-back-button></ion-nav-back-button>
 
@@ -10,12 +10,24 @@
 
 </ion-nav-buttons>
 </ion-nav-bar>
+<div class="bar bar-subheader">
+  <h2 class="title">
+    <div >
+      <onezone-datepicker datepicker-object="onezoneDatepicker" >
 
+        <div class="positive show-onezone-datepicker row">
+        <button class="button button-icon icon ion-ios-calendar-outline show-onezone-datepicker col-40 positive" ></button>
+        <span class="col-40">        {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}</span>
+        </div>
+        </onezone-datepicker>
+
+    </div>
+
+  </h2>
+</div>
   <ion-content class="padding">
+<br><br>
     <onezone-datepicker datepicker-object="onezoneDatepicker">
-        <button class="button button-block button-outline button-positive show-onezone-datepicker">
-            {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
-        </button>
     </onezone-datepicker>
 
 
@@ -52,17 +64,17 @@
 
     <tr class="positive">
 
-        <th>Name</th>
-        <th>Type</th>
-        <th>Amount</th>
-        <th>Action</th>
+        <th style="width:25%">Name</th>
+        <th style="width:25%">Type</th>
+        <th style="width:25%">Amount</th>
+        <th style="width:25%">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="itm in incomeList track by $index" ng-click="update(itm)"  class="royal {{incomeList.show}}">
       <td  >{{itm.name}}</td>
       <td ><span class="primary">Income<span></td>
-      <td ><input  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
+      <td ><input style="width:75%" type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
       <td ><button class="button button-small button-positive " ng-click="saveTodayIncome(itm)" style="padding-top:0px;padding-bottom:0px;margin:0px;float:right">
       save
       </button></td>
@@ -70,7 +82,7 @@
     <tr ng-repeat="itm in todos.today track by $index" ng-click="update(itm)" class="royal {{showListE}}">
       <td  >{{itm.name}}</td>
       <td ><span class="primary">Expense<span></td>
-        <td ><input  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
+        <td ><input style="width:75%"  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
         <td ><button class="button button-small button-positive" ng-click="saveThis(itm)" style="padding-top:0px;padding-bottom:0px;margin:0px;float:right">
           save
         </button>
@@ -97,28 +109,42 @@
           <th>Name</th>
           <th>Type</th>
           <th>Amount</th>
+          <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="itm in resultValue=(todos.savedExpense) track by $index" ng-click="update(itm)" class="royal">
+      <tr ng-repeat="itm in resultValue=(todos.savedExpense) track by $index" ng-click="update(itm,'Expense')" class="royal">
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Expense<span></td>
         <td >{{itm.amount}}</td>
+        <td>
+          <button class="button" ng-controller="activeTodoController" ng-click="addNew()">
+                  <i class="icon ion-ios-trash-outline"></i>
+          </button>
+
+        </td>
       </tr>
       <tr class="calm info {{todos.savedExpense==null?'ng-hide':''}}" >
         <td  >Total</td>
         <td >Expense</td>
-        <td >{{resultValue | sumOfValue:'amount'}}</td>
+        <td >{{resultValue | sumOfValue:'amount'}}</td><td></td>
       </tr>
-      <tr ng-repeat="itm in totalIncome=(todos.savedIncome) track by $index" ng-click="update(itm)" class="royal">
+      <tr ng-repeat="itm in totalIncome=(todos.savedIncome) track by $index" ng-click="update(itm,'Income')" class="royal">
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Income<span></td>
         <td >{{itm.amount}}</td>
+        <td>
+          <button class="button" ng-controller="activeTodoController" ng-click="addNew()">
+                  <i class="icon ion-ios-trash-outline"></i>
+          </button>
+
+        </td>
+
       </tr>
       <tr class="calm info {{todos.savedIncome==null?'ng-hide':''}}">
         <td  >Total</td>
         <td >Income</td>
-        <td >{{totalIncome | sumOfValue:'amount'}}</td>
+        <td >{{totalIncome | sumOfValue:'amount'}}</td><td></td>
       </tr>
 
     </tbody>

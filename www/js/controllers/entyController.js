@@ -98,6 +98,13 @@ angular.module('starter.controllers')
 	 statusService.refresh();
  }
 
+$scope.update=function(itm,type)
+{
+	console.log("Updating");
+	$scope.inputType.type=type;
+	dao.addN=itm;
+}
+
 
 //Watchers
 $scope.$watch(function(){

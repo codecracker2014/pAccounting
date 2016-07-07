@@ -14,30 +14,51 @@
  </button>
 
 </ion-nav-buttons>
+<div class="bar bar-subheader">
+  <h2 class="title">
+    <div class="row"><div class="col-40">
+      <onezone-datepicker datepicker-object="onezoneDatepicker1" >
+
+        <div class="positive show-onezone-datepicker">
+        <i class="icon ion-ios-calendar-outline show-onezone-datepicker"></i>
+              {{onezoneDatepicker1.date | date:'dd MMMM'}}
+            </div>
+        </onezone-datepicker>
+        </div>
+        <div class="col-20 positive">To</div>
+        <div class="col-40">
+        <onezone-datepicker datepicker-object="onezoneDatepicker2">
+          <div class="positive show-onezone-datepicker">
+          <i class="icon ion-ios-calendar-outline show-onezone-datepicker"></i>
+             {{onezoneDatepicker2.date | date:'dd MMMM'}}
+          </div>
+      </onezone-datepicker>
+      </div>
+    </div>
+
+  </h2>
+</div>
   <ion-content class="has-header">
     <div class="card">
-      <onezone-datepicker datepicker-object="onezoneDatepicker1">
-            <button class="button button-block button-outline button-positive show-onezone-datepicker">
-              From {{onezoneDatepicker1.date | date:'dd MMMM yyyy'}}
-            </button>
+      <br>
+        <onezone-datepicker datepicker-object="onezoneDatepicker1">
         </onezone-datepicker>
         <onezone-datepicker datepicker-object="onezoneDatepicker2">
-          <button class="button button-block button-outline button-positive show-onezone-datepicker">
-            To {{onezoneDatepicker2.date | date:'dd MMMM yyyy'}}
-          </button>
-      </onezone-datepicker>
+        </onezone-datepicker>
 </div>
     <div class="{{level1Hide}}" >
 
     <ion-list>
 
-      <div class="list card " style="z-index:-4">
-        <div class="item {{hideTotals}}" >
-          Effective income: {{status.totalI-status.total}}
-          <div class="item item-divider">Totals</div>
+      <div class="" style="z-index:-4">
+        <div class="{{hideTotals}}" >
+      <div class="bar bar-calm"  style="position: inherit;height:44px; width:100%;">
+              <h1 class="title" >Totel Expenses</h1>
+      </div>
+
           <table class="table table-condensed">
             <thead >
-              <tr class="info">
+              <tr class="positive">
 
                   <th>Expense</th>
                   <th>Total</th>
@@ -45,13 +66,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="itm in status.items track by $index" >
+              <tr ng-repeat="itm in status.items track by $index" class="royal">
                 <td  >{{itm}}</td>
                 <td >{{status.mStatus[itm]}}</td>
                 <td >{{status.fr[itm]}}</td>
 
               </tr>
-              <tr>
+              <tr class="calm">
                 <td >Total</td>
                 <td >{{status.total}}</td>
                 <td ></td>
@@ -62,11 +83,14 @@
           </table>
 
         </div>
-        <div class="item {{hideTotals}}" >
-          <div class="item item-divider">Totals</div>
+        <div class="{{hideTotals}}" >
+      <div class="bar bar-calm"  style="position: inherit;height:44px; width:100%;">
+              <h1 class="title" >Totel Income</h1>
+      </div>
+
           <table class="table table-condensed">
             <thead >
-              <tr class="info">
+              <tr class="positive">
 
                   <th>Income</th>
                   <th>Total</th>
@@ -74,24 +98,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="itm in status.itemsI track by $index" >
+              <tr ng-repeat="itm in status.itemsI track by $index" class="royal" >
                 <td  >{{itm}}</td>
                 <td >{{status.mStatusI[itm]}}</td>
                 <td >{{status.frI[itm]}}</td>
 
               </tr>
-              <tr>
+              <tr class="calm">
                 <td >Total</td>
                 <td >{{status.totalI}}</td>
                 <td ></td>
 
 
         </tr>
-        <tr>
+<!--        <tr>
           <td >Total</td>
           <td >{{currentData.total}}</td>
           <td ></td>
-
+-->
         </div>
 
         <div class="item item-divider {{hideChart}}">
