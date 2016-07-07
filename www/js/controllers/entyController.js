@@ -104,6 +104,23 @@ $scope.update=function(itm,type)
 	$scope.inputType.type=type;
 	dao.addN=itm;
 }
+$scope.delete=function(itm,type,index)
+{
+	if(type=="Expense")
+	{
+			dao.savedExpense.splice(index,1);
+			dao.save(dao.savedExpense);
+			statusService.refresh();
+
+	}
+	else {
+		dao.savedIncome.splice(index,1);
+		dao.save(dao.savedIncome,"i");
+		statusService.refresh();
+
+	}
+
+}
 
 
 //Watchers

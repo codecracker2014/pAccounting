@@ -284,9 +284,11 @@ console.log("Loading dao");
      var key=""+dd+""+mm+""+yy;
      return key;
    }
-   this.save=function(todos)
+   this.save=function(todos,type)
    {
-     var key=getKey(this.date);
+     if(type==null)
+     type="";
+     var key=type+""+getKey(this.date);
      var dt=new Date();
      var l=todos.length;
      var tmp=[];
@@ -304,7 +306,7 @@ console.log("Loading dao");
           tmp.push(todos[i]);
        }
      }
-     var keys=JSON.parse(localStorage.getItem("keys"));
+     var keys=JSON.parse(localStorage.getItem(type+"keys"));
      if(keys==null)
      var keys=[];
      if(keys!=null)
@@ -319,7 +321,7 @@ console.log("Loading dao");
        keys.push(key);
      }
      //keys.push('1213');
-     localStorage.setItem("keys",JSON.stringify(keys));
+     localStorage.setItem(type+"keys",JSON.stringify(keys));
      localStorage.setItem(key,JSON.stringify(tmp));
      this.refresh();
    }

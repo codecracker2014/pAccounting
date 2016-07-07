@@ -71,7 +71,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="itm in incomeList track by $index" ng-click="update(itm)"  class="royal {{incomeList.show}}">
+    <tr ng-repeat="itm in incomeList track by $index"   class="royal {{incomeList.show}}">
       <td  >{{itm.name}}</td>
       <td ><span class="primary">Income<span></td>
       <td ><input style="width:75%" type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
@@ -79,7 +79,7 @@
       save
       </button></td>
     </tr>
-    <tr ng-repeat="itm in todos.today track by $index" ng-click="update(itm)" class="royal {{showListE}}">
+    <tr ng-repeat="itm in todos.today track by $index"  class="royal {{showListE}}">
       <td  >{{itm.name}}</td>
       <td ><span class="primary">Expense<span></td>
         <td ><input style="width:75%"  type="number"  placeholder="Amount" ng-model="itm.amount" /></td>
@@ -109,34 +109,38 @@
           <th>Name</th>
           <th>Type</th>
           <th>Amount</th>
-          <th></th>
+          <th>Edit</th>
+          <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="itm in resultValue=(todos.savedExpense) track by $index" ng-click="update(itm,'Expense')" class="royal">
+      <tr ng-repeat="itm in resultValue=(todos.savedExpense) track by $index" class="royal">
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Expense<span></td>
         <td >{{itm.amount}}</td>
         <td>
-          <button class="button" ng-controller="activeTodoController" ng-click="addNew()">
-                  <i class="icon ion-ios-trash-outline"></i>
-          </button>
+          <i class=" icon ion-edit" style="width:70%" ng-click="update(itm,'Expense')"></i>
+        </td>
+        <td>
+            <i class=" icon ion-ios-trash-outline" ng-click="delete(itm,'Expense',$index)"></i>
 
         </td>
       </tr>
       <tr class="calm info {{todos.savedExpense==null?'ng-hide':''}}" >
         <td  >Total</td>
         <td >Expense</td>
-        <td >{{resultValue | sumOfValue:'amount'}}</td><td></td>
+        <td >{{resultValue | sumOfValue:'amount'}}</td><td></td><td></td><td></td>
       </tr>
       <tr ng-repeat="itm in totalIncome=(todos.savedIncome) track by $index" ng-click="update(itm,'Income')" class="royal">
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Income<span></td>
         <td >{{itm.amount}}</td>
         <td>
-          <button class="button" ng-controller="activeTodoController" ng-click="addNew()">
-                  <i class="icon ion-ios-trash-outline"></i>
-          </button>
+          <i class=" icon ion-edit" style="width:70%" ng-click="update(itm,'Income')"></i>
+        </td>
+
+        <td>
+          <i class=" icon ion-ios-trash-outline" ng-click="delete(itm,'Income',$index)"></i>
 
         </td>
 
@@ -144,7 +148,7 @@
       <tr class="calm info {{todos.savedIncome==null?'ng-hide':''}}">
         <td  >Total</td>
         <td >Income</td>
-        <td >{{totalIncome | sumOfValue:'amount'}}</td><td></td>
+        <td >{{totalIncome | sumOfValue:'amount'}}</td><td></td><td></td><td></td>
       </tr>
 
     </tbody>
