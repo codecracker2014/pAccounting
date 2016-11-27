@@ -7,11 +7,17 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','onezone-datepicker','ngCordova'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+.run(function($ionicPlatform,$ionicLoading) {
+  $ionicPlatform.ready(function($ionicPopup) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-
+    $ionicLoading.show({
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 200,
+                    showDelay: 0
+                  });
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -20,6 +26,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+  //  db = $cordovaSQLite.openDB("my.db");
+//    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+$ionicLoading.hide();
 
 
   });
@@ -31,9 +40,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+
   console.log("LL");
     $ionicConfigProvider.tabs.position('bottom');
   $stateProvider
+
+
+  .state('signin', {
+      url: '/sign-in',
+      templateUrl: 'templates/sign-in.html',
+      controller: 'SignInCtrl'
+    })
 
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -70,15 +87,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
 
   .state('tab.account', {
     url: '/account',
@@ -86,6 +94,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
       'tab-account': {
         templateUrl: 'templates/tab-setting.html',
         controller: 'configController'
+      }
+    }
+  })
+  .state('tab.backup', {
+    url: '/backup',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/backup.html',
+        controller: 'backupController'
       }
     }
   })
@@ -108,6 +125,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
         }
       }
     })
+
+
 .state('tab.user-list', {
       url: '/user-list',
       views: {
@@ -117,6 +136,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
         }
       }
     })
+.state('tab.simple-lending', {
+          url: '/simple-lending',
+          views: {
+            'tab-planning': {
+              templateUrl: 'templates/simple-lending.html',
+              controller: 'simpleLendingController'
+            }
+          }
+        })
+.state('tab.lending-detail', {
+          url: '/lending-detail/:mob',
+          views: {
+            'tab-planning': {
+              templateUrl: 'templates/lending-detail.html',
+              controller: 'lendingDetailController'
+            }
+          }
+        })
 
 
   .state('tab.addIncome', {
@@ -131,6 +168,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','o
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  var user=JSON.parse(localStorage.getItem("user"));
+  if(user==null)
+  {
+      $urlRouterProvider.otherwise('/sign-in');
+  }
+  else {
+      $urlRouterProvider.otherwise('/tab/dash');
+  }
+
 
 });

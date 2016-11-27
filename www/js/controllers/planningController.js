@@ -1,16 +1,9 @@
 angular.module('starter.controllers')
 
-.controller('planningController', function($scope,planningService,$cordovaContacts,notificationService,$ionicSideMenuDelegate) {
+.controller('planningController', function($scope,planningService,contactsRepo,notificationService,$ionicSideMenuDelegate,simpleTransactionService) {
 
 
-/*
-$scope.notification=notificationService.loadNotification();
-console.log(notificationService.loadNotification());
-
-$scope.$watch(function(){console.log(notificationService.notification);return notificationService.notification;},function(newVal){
-  $scope.notification=newVal;
-});*/
-
+$scope.domainObject=simpleTransactionService;
 $scope.toggleLeft = function() {
    $ionicSideMenuDelegate.toggleLeft();
    console.log("Called left");

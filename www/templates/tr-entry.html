@@ -25,8 +25,41 @@
 
   </h2>
 </div>
-  <ion-content class="padding">
-<br><br>
+
+<ion-side-menus  style="margin-top:44px">
+  <!-- Left menu -->
+  <ion-side-menu side="left"  style="margin-top:44px">
+<div class="list">
+
+  <a class="item item-icon-left" href="#/tab/add-event">
+  <i class="icon ion-person"></i>
+    {{user.name}} <br>{{user.mob}}
+  </a>
+  <a class="item item-icon-left" href="#/tab/user-list">
+    <i class="icon ion-person-stalker"></i>
+    Contacts
+
+  </a>
+
+  <a class="item item-icon-left" href="#tab/simple-lending">
+    <i class="icon ion-social-usd"></i>
+    Add a Transaction
+
+  </a>
+  <a class="item item-icon-left" href="#tab/backup">
+    <i class="icon ion-archive"></i>
+    Data backup
+
+  </a>
+
+</div>
+
+  </ion-side-menu>
+  <ion-side-menu-content >
+    <ion-content >
+
+
+
     <onezone-datepicker datepicker-object="onezoneDatepicker">
     </onezone-datepicker>
 
@@ -55,7 +88,7 @@
     <!-- daily inputs Reminders-->
 <div class="{{(incomeList.length==0)&&(todos.today.length==0)?'ng-hide':''}}">
 
-    <div class="bar bar-calm"  style="position: inherit;height:44px; width:100%;">
+    <div class="bar bar-calm "  style="position: inherit;height:44px; width:100%;">
               <h1 class="title" >  Reminders</h1>
     </div>
 <table class="table table-condensed ">
@@ -95,7 +128,7 @@
 </div>
 
 <br>
-<div class="{{((todos.savedIncome==null)&&(todos.savedExpense==null))?'ng-hide':''}}">
+<div class="{{((todos.savedIncome==null||todos.savedIncome.length==0)&&(todos.savedExpense==null||todos.savedExpense.length==0))?'ng-hide':''}}">
   <div class="bar bar-balanced"  style="position: inherit;height:44px; width:100%;">
             <h1 class="title" >  Saved Records</h1>
   </div>
@@ -118,15 +151,15 @@
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Expense<span></td>
         <td >{{itm.amount}}</td>
-        <td>
-          <i class=" icon ion-edit" style="width:70%" ng-click="update(itm,'Expense')"></i>
+        <td ng-click="update(itm,'Expense')">
+          <i class=" icon ion-edit" style="width:70%" ></i>
         </td>
-        <td>
-            <i class=" icon ion-ios-trash-outline" ng-click="delete(itm,'Expense',$index)"></i>
+        <td ng-click="delete(itm,'Expense',$index)">
+            <i class=" icon ion-ios-trash-outline" ></i>
 
         </td>
       </tr>
-      <tr class="calm info {{todos.savedExpense==null?'ng-hide':''}}" >
+      <tr class="calm info {{todos.savedExpense==null||todos.savedExpense.length==0?'ng-hide':''}}" >
         <td  >Total</td>
         <td >Expense</td>
         <td >{{resultValue | sumOfValue:'amount'}}</td><td></td><td></td><td></td>
@@ -135,17 +168,17 @@
         <td  >{{itm.name}}</td>
         <td ><span class="primary">Income<span></td>
         <td >{{itm.amount}}</td>
-        <td>
-          <i class=" icon ion-edit" style="width:70%" ng-click="update(itm,'Income')"></i>
+        <td ng-click="update(itm,'Income')">
+          <i class=" icon ion-edit" style="width:70%" ></i>
         </td>
 
-        <td>
-          <i class=" icon ion-ios-trash-outline" ng-click="delete(itm,'Income',$index)"></i>
+        <td ng-click="delete(itm,'Income',$index)">
+          <i class=" icon ion-ios-trash-outline" ></i>
 
         </td>
 
       </tr>
-      <tr class="calm info {{todos.savedIncome==null?'ng-hide':''}}">
+      <tr class="calm info {{todos.savedIncome==null||todos.savedIncome.length==0?'ng-hide':''}}">
         <td  >Total</td>
         <td >Income</td>
         <td >{{totalIncome | sumOfValue:'amount'}}</td><td></td><td></td><td></td>
@@ -159,5 +192,9 @@
 </div>
 
   </ion-content>
+</ion-side-menu-content>
+
+</ion-side-menus>
+
 
 </ion-view>

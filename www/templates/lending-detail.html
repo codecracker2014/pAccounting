@@ -1,0 +1,49 @@
+<ion-view view-title="Lending">
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+  <ion-content >
+    <div class="item item-divider bar bar-positive" >
+<div class="col-50 align-left">
+{{contact.name}}
+</div>
+<div class="col-50 align-right">
+  {{mob}}
+
+</div>
+</div>
+<div class=" item   "  style="font-size:24px">
+  <div class="col-50 align-left royal">
+Total {{contact.total>0?'Receiable':'Payable'}}
+</div>
+<div class="col-50 align-right {{contact.total>0?'balanced':'assertive'}}">
+{{contact.total}}
+</div>
+</div>
+<div>
+  <table class="table table-condensed ">
+
+    <thead >
+
+      <tr class="positive">
+
+          <th>Description</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="itm in resultValue=(transactions) track by $index" class="royal">
+        <td  >{{itm.desc==''?'-':itm.desc}}</td>
+        <td ><span class="primary">{{types[itm.type]}}<span></td>
+        <td class="{{typesSign[itm.type]=='+'?'balanced':'assertive'}}">{{typesSign[itm.type]}}{{itm.amount}}</td>
+        <td>{{itm.date | date:'dd-MMM-yy'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,59 @@
+<ion-view view-title="Lending">
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+
+</ion-nav-bar>
+<ion-nav-buttons side="right">
+  <a class="button " style="color:white;" href="#/tab/add-event">
+Add Invoice<i class="icon ion-chevron-right"></i>
+  </a>
+
+</ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="list">
+
+      <span class="item item-icon-left positive" >
+
+      Add a Transaction
+    </span>
+    </div>
+
+<!-- Add Lending form -->
+<onezone-datepicker datepicker-object="onezoneDatepicker4">
+    <button class="button button-block button-outline button-positive show-onezone-datepicker">
+        {{onezoneDatepicker4.date | date:'dd MMMM yyyy'}}
+    </button>
+</onezone-datepicker>
+
+<div class='list'>
+<form id='simpleTrForm' novalidate>
+
+
+<label class='item item-input'>
+<input type='text' ng-model='key' placeholder='Search'></label>
+<label class='item  item-select'>Contact
+  <select ng-model='dummySimpleTr.contact' required>
+    <option ng-repeat='itm in contacts | filter:key track by $index' value={{itm}}>{{itm.name}},{{itm.mob}}</option>
+  </select>
+</label>
+<label class='item  item-select'>Type
+<select ng-model='dummySimpleTr.type' required><options>
+  <option selected value="1">Lending</option>
+  <option value="2">Borrowing</option>
+  <option value="3">Money Back</option>
+  <option value="4">Pay Back</option>
+</options>
+</select>
+</label>
+<label class='item item-input'><input type='text'  placeholder='Description' ng-model="dummySimpleTr.desc"> </label>
+<label class='item item-input'><input type='number' ng-model='dummySimpleTr.amount' placeholder='Amount'> </label>
+<button class="button button-full button-positive" ng-click="saveSimpleTr()" ng-disabled="simpleTrForm.$invalid">
+  Save
+</button>
+</form>
+</div>
+
+
+  </ion-content>
+</ion-view>

@@ -4,49 +4,103 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Add Event">
-     <ion-nav-back-button>
-      </ion-nav-back-button>
+<ion-view view-title="Add Invoice">
+  <ion-nav-bar class="bar-positive">
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+<div class="alert alert-danger {{showError==true?'':'ng-hide'}}" style="width:100%;position: absolute; z-index: 100; top: 35px;">
+  {{errorMessage}}
+</div>
+      <div class="bar bar-subheader">
+        <h2 class="title">
+          <div >
+            <onezone-datepicker datepicker-object="onezoneDatepicker3" >
+
+              <div class="positive show-onezone-datepicker row">
+              <button class="button button-icon icon ion-ios-calendar-outline show-onezone-datepicker col-40 positive" ></button>
+              <span class="col-40">        {{onezoneDatepicker3.date | date:'dd MMMM yyyy'}}</span>
+              </div>
+              </onezone-datepicker>
+
+          </div>
+
+        </h2>
+      </div>
   <ion-content class="padding">
+    <br><br>
+        <onezone-datepicker datepicker-object="onezoneDatepicker3">
+        </onezone-datepicker>
+
  <div class="list">
   <label class="item item-input">
-    <input type="text" placeholder="Name">
+    <input type="text" placeholder="Description" ng-model=bill.desc>
   </label>
   <label class="item item-input">
-    <input type="text" placeholder="Place">
+    <input type="text" placeholder="Place of bill" ng-model=bill.place>
   </label>
+
 </div>
 
 <div class="list">
-+ Transaction
- <label class="item item-input">
-   <input type="text" placeholder="Description">
+<ion-list>
+  <ion-checkbox ng-model="choice.payer">Equal share for Payers?</ion-checkbox>
+  <ion-checkbox ng-model="choice.partner">Equal share for Partners?</ion-checkbox>
+</ion-list>
+ <label class="item item-input {{choice.payer==true||bill.totalAmount!=0?'':'ng-hide'}}">
+<span class="input-label ">Total Amount</span>
+   <input type="number"  ng-model="bill.totalAmount" >
+
  </label>
+
  </div>
- <div class="card row">
+ <div class="list item">
 
-   <div class="card col positive" style="width:40%; float:left">
-     Payers
-     <a class="button button-icon icon ion-plus-circled positive" style="float:right" ng-click="selectPayers()"></a>
+     <a class="button button-icon icon ion-plus-circled positive"  ng-click="selectPayers()">   &nbsp;&nbsp;&nbsp;Add Payer/Partner</a>
 
-     <label class="item item-input" ng-repeat='itm in Newtr.payers'>
-       {{itm.name}}, {{itm.amount}}
-     </label>
-
-   </div>
-   <div class="col col-10"><center>
-  <a class="button button-small icon ion-checkmark" style="width:5%"></a></center>
 </div>
-   <div class="card positive col" style="width:40%; float:right">
-     Partners
-     <a class="button button-icon icon ion-plus-circled positive" style="float:right" ng-click="selectPartners()"></a>
+ <div class="card {{payersList.length==0?'ng-hide':''}}">
+ <label class="item item-divider">Payers
+ </label>
+ <label class="item item-input {{payersList.length!=0?'':'ng-hide'}}" ng-repeat='payer in payersList'>
+<span class="input-label ">{{payer.name}}</span>
+   <input type="number"  ng-model="payer.amount" ng-change="{{getTotalAmount(payersList)}}">
 
-          <label class="item item-input" ng-repeat='itm in Newtr.borrowers'>
-            {{itm.name}}, {{itm.amount}}
-          </label>
+ </label>
+
+</div>
+<div class="card {{partnersList.length==0?'ng-hide':''}}">
+<label class="item item-divider">Partners
+</label>
+<label class="item item-input" ng-repeat='itm in partnersList'>
+  <span class="input-label ">{{itm.name}}</span>
+     <input type="number"  ng-model="itm.amount">
+</label>
+</div>
+
+ <button class="button button-block button-positive " ng-click="addPayment(Newtr)">
+   Add Payment
+ </button>
+ <button class="button button-block button-positive " ng-click="getContacts()">
+  contacts
+ </button>
+
+ <div class="list" ng-show="phoneContacts">
+   <div class="card" ng-repeat="contact in phoneContacts.phoneContacts">
+     <div class="item item-divider">
+       {{ contact.name.formatted }}
+     </div>
+     <div class="item item-text-wrap">
+       <p><strong>Phone(s)</strong></p>
+       <div ng-repeat="number in contact.phoneNumbers">
+         <p>{{ number.value }}</p>
+       </div>
+       <p><strong>Email(s)</strong></p>
+       <div ng-repeat="email in contact.emails">
+         <p>{{ email.value }}</p>
+       </div>
+     </div>
    </div>
-
-
  </div>
 
   </ion-content>

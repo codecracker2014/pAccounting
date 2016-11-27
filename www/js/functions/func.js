@@ -172,7 +172,7 @@ function filterKeys(keys,startDate,endDate)
   var endKey=getKey(endDate);
 //  console.log("keys:"+keys+"stkey "+stKey);
   flag=false;
-  
+
   for(i=0;i<keys.length;i++)
   {
   //  console.log("keys[i]"+keys[i]+"stKey"+stKey);
@@ -196,6 +196,20 @@ function filterKeys(keys,startDate,endDate)
   console.log("endKey"+endKey+"Selected:"+tmp);
   return tmp;
 }
+function generateKeys(startDate,endDate)
+{
+  var tmp=[];
+  var idate=new Date(startDate);
+  while (idate<=endDate) {
+    var k=getKey(idate);
+    tmp.push(k);
+    var newDate = idate.setDate(idate.getDate() + 1);
+    idate = new Date(newDate);
+
+  }
+  return tmp;
+  }
+
 
 /*function month_name(i,mode)
 {
@@ -230,3 +244,16 @@ var AppDate = (function () {
         }
     };
 })();
+
+
+function findContact(contacts,mob)
+{
+    if(contacts==null)
+    return -1;
+    for(var i=0;i<contacts.length;i++)
+    {
+      if(contacts[i].mob==mob)
+      return contacts[i];
+    }
+    return -1;
+}

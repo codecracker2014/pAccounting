@@ -1,7 +1,36 @@
 angular.module('starter.controllers')
 
-.controller('activeTodoController', function($scope,dao,statusService,levelService,incomeService,$ionicSideMenuDelegate) {
+.controller('activeTodoController', function($scope,dao,statusService,levelService,incomeService,$ionicSideMenuDelegate,$cordovaFile) {
   //dao.getExpToday();
+	var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
+	//pdfMake.createPdf(docDefinition).open();
+	console.log("file plugin "+$cordovaFile);
+// 	document.addEventListener('deviceready', function () {
+//
+// 		$cordovaFile.createDir(cordova.file.externalRootDirectory, "pAccounting", false)
+//        .then(function (success) {
+//          console.log("created dir");
+//        }, function (error) {
+//          console.log("err created dir");
+//        });
+//
+// 			 pdfMake.createPdf(docDefinition).getBuffer(function (buffer) {
+// 			     var utf8 = new Uint8Array(buffer); // Convert to UTF-8...
+// 			     binaryArray = utf8.buffer; // Convert to Binary...
+// 					 $cordovaFile.writeFile(cordova.file.externalRootDirectory, "pAccounting/example.pdf", binaryArray, true)
+// 					 		 .then(function (success) {
+// 					 			 alert("Done");
+// 					 		 }, function (error) {
+// 					 			 console.log("err");
+// 					 		 });
+// 			 });
+//
+//
+//
+//
+//
+// });
+	$scope.user=JSON.parse(localStorage.getItem("user"));
 	console.log("Controller Init");
 	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();

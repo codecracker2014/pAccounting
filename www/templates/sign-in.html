@@ -1,0 +1,33 @@
+
+      <ion-view view-title="Register" class="bar-positive">
+        <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button></ion-nav-back-button>
+
+      </ion-nav-buttons>
+      </ion-nav-bar>
+        <ion-content>
+          <div class="list">
+            <form name="register" novalidate>
+            <label class="item item-input">
+              <span class="input-label">name</span>
+              <input type="text" ng-model="user.name" required>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">mobile</span>
+              <input type="number" ng-model="user.mob" required >
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Password</span>
+              <input type="password" ng-model="user.password" required>
+            </label>
+          </div>
+          <div class="padding">
+            <button class="button button-block button-positive" ng-click="signIn(user)" >
+              Register
+            </button>
+            <p class="text-center">
+            </p>
+          </div>
+        </form>
+        </ion-content>
+      </ion-view>

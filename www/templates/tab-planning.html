@@ -1,9 +1,9 @@
 
-<ion-view view-title="Your money flows">
+<ion-view view-title="Your Cas flow">
 
 
 <div class="bar bar-header bar-positive">
-  <h1 class="title">bar-positive</h1>
+
 </div>
 <ion-side-menus style="margin-top:44px" >
   <!-- Left menu -->
@@ -12,41 +12,86 @@
 
   <a class="item item-icon-left" href="#/tab/add-event">
     <i class="icon ion-ios-cart"></i>
-    Add even
+    Add Invoice
   </a>
   <a class="item item-icon-left" href="#/tab/user-list">
     <i class="icon ion-person-stalker"></i>
-    Your connections
+    Contacts
 
   </a>
 
-  <a class="item item-icon-left" href="#">
+  <a class="item item-icon-left" href="#tab/simple-lending">
     <i class="icon ion-social-usd"></i>
-    Lend money
+    Add a Transaction
 
   </a>
 
 </div>
 
   </ion-side-menu>
-  <ion-side-menu-content edge-drag-threshold="true"
-  drag-content="true">
-  <!-- Main content, usually <ion-nav-view> -->
+  <ion-side-menu-content >
+    <ion-content >
 
+<div class="list positive" >
+
+  <a class="item item-icon-left " href="#">
+<i class="icon ion-log-in"></i>
+    Receivable
+<label class="align-right balanced" style="font-size:24px">{{domainObject==null ||  domainObject.totalR==null?0:domainObject.totalR}}</label>
+  </a>
+
+  <a class="item item-icon-left" href="#">
+<i class="icon ion-log-out"></i>
+    Payable
+<label class="align-right {{domainObject.totalP>=0?'balanced':'assertive'}}"  style="font-size:24px">{{domainObject.totalP==null?0:domainObject.totalP}}</label>
+  </a>
+
+</div>
+
+  <div class="item item-divider bar bar-positive">
+Creditor/Debtor
+  </div>
+
+
+      <div class="list">
+
+          <a class="item item-avatar" href="#/tab/lending-detail/{{itm.mob}}" ng-repeat="itm in domainObject.connections">
+            <img src="img/default-contact.png">
+            <div class="row">
+              <div class="col col-75">
+            <h2>{{itm.name}}</h2>
+            <p>{{itm.mob}}</p>
+          </div>
+          <div class="col col-25">
+            <label class="{{itm.total>0?'balanced':'assertive'}}">{{itm.total}}</label>
+          </div>
+          <div class="col col-25">
+          <label class="{{itm.total>=0?'balanced':'assertive'}}">{{itm.total>0?'R':'P'}}</label>
+          </div>
+        </div>
+          </a>
+
+
+      </div>
+
+
+</ion-content >
+<br>
+<br>
 
   </ion-side-menu-content>
 
 </ion-side-menus>
 
-  <ion-nav-bar class="bar-dark">
+  <ion-nav-bar class="bar-positive">
         <ion-nav-buttons side="left">
    <!-- Toggle left side menu -->
    <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></button>
   </ion-nav-buttons>
   <ion-nav-back-button></ion-nav-back-button>
+
 </ion-nav-bar>
 
 
-<ion-content>
-  </ion-content>
+
 </ion-view>

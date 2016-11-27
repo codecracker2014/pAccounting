@@ -24,7 +24,10 @@ angular.module('starter.services')
 //      console.log("st"+st);
 			var keys=JSON.parse(localStorage.getItem("keys"));
 			if(keys!=null)
-      keys=filterKeys(keys,this.startDate,this.endDate);
+			{
+				keys=generateKeys(this.startDate,this.endDate);
+				console.log(keys);
+			}
 			else {
 				return;
 			}
@@ -33,8 +36,9 @@ angular.module('starter.services')
       for(var i=0;i<keys.length;i++)
 			{
 				var logs=JSON.parse(localStorage.getItem(keys[i]));
-
-
+        if(logs==null)
+				    continue;
+        console.log(logs+" , "+keys[i]);
 				for(var j=0;j<logs.length;j++)
 				{
           if(this.items.indexOf(logs[j].name)==-1)
@@ -62,6 +66,7 @@ angular.module('starter.services')
 			this.width="300px";idth="300px";
       this.height="100%";
       console.log("points"+this.dataPoints);
+			
       createChart("chartContainer","Expense chart",this.dataPoints);
       this.width="300px";
       this.height="100%";
@@ -75,7 +80,7 @@ angular.module('starter.services')
 			//      console.log("st"+st);
 						var keys=JSON.parse(localStorage.getItem("ikeys"));
 						if(keys!=null)
-			      keys=filterKeys(keys,this.startDate,this.endDate);
+			      keys=generateKeys(this.startDate,this.endDate);
 						else {
 							return;
 						}
@@ -83,8 +88,9 @@ angular.module('starter.services')
 						this.frI=[];
 			      for(var i=0;i<keys.length;i++)
 						{
-							var logs=JSON.parse(localStorage.getItem(keys[i]));
-
+							var logs=JSON.parse(localStorage.getItem("i"+keys[i]));
+							if(logs==null)
+									continue;
 
 							for(var j=0;j<logs.length;j++)
 							{

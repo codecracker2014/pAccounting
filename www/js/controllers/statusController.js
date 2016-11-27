@@ -16,7 +16,7 @@ angular.module('starter.controllers')
 	$scope.hideHistogram="ng-hide";
   $scope.leve1Hide="";
   $scope.levelHide="ng-hide";
-  console.log("Status");
+  console.log("Status dd "+statusService.startDate);
 
 	$scope.show = function() {
 
