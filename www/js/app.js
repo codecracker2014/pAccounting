@@ -4,9 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
+// 'starter.controllers' is found in controllers.js url: 'http://pa-gajendra.rhcloud.com/
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','onezone-datepicker','ngCordova'])
-
+.constant('ServerEndpoint', {
+  url: 'http://localhost:8100'
+})
 .run(function($ionicPlatform,$ionicLoading) {
   $ionicPlatform.ready(function($ionicPopup) {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -41,7 +43,7 @@ $ionicLoading.hide();
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
 
-  console.log("LL");
+  //console.log("LL");
     $ionicConfigProvider.tabs.position('bottom');
   $stateProvider
 
@@ -77,6 +79,18 @@ $ionicLoading.hide();
       }
     }
   })
+
+
+  .state('tab.list-notifications', {
+      url: '/list-notifications',
+      views: {
+        'tab-dash': {
+          templateUrl: 'templates/notification-list.html',
+          controller: 'appNotifications'
+        }
+      }
+    })
+
 
   .state('tab.chats', {
       url: '/chats',
@@ -117,7 +131,7 @@ $ionicLoading.hide();
     }
   })
   .state('tab.add-event', {
-      url: '/add-event',
+      url: '/add-event/:billId',
       views: {
         'tab-planning': {
           templateUrl: 'templates/add-event.html',
@@ -137,13 +151,15 @@ $ionicLoading.hide();
       }
     })
 .state('tab.simple-lending', {
+          cache: false,
           url: '/simple-lending',
           views: {
             'tab-planning': {
               templateUrl: 'templates/simple-lending.html',
               controller: 'simpleLendingController'
             }
-          }
+          },
+          params: {data:null}
         })
 .state('tab.lending-detail', {
           url: '/lending-detail/:mob',

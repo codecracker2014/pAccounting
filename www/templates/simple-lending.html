@@ -5,7 +5,7 @@
 
 </ion-nav-bar>
 <ion-nav-buttons side="right">
-  <a class="button " style="color:white;" href="#/tab/add-event">
+  <a class="button " style="color:white;" href="#/tab/add-event/{{defaultMob}}">
 Add Invoice<i class="icon ion-chevron-right"></i>
   </a>
 
@@ -34,15 +34,12 @@ Add Invoice<i class="icon ion-chevron-right"></i>
 <input type='text' ng-model='key' placeholder='Search'></label>
 <label class='item  item-select'>Contact
   <select ng-model='dummySimpleTr.contact' required>
-    <option ng-repeat='itm in contacts | filter:key track by $index' value={{itm}}>{{itm.name}},{{itm.mob}}</option>
+    <option ng-repeat='itm in contacts | filter:key track by $index' ng-selected="{{dummySimpleTr.contact.mob==itm.mob?true:false}}" value={{itm}}>{{itm.name}},{{itm.mob}}</option>
   </select>
 </label>
 <label class='item  item-select'>Type
 <select ng-model='dummySimpleTr.type' required><options>
-  <option selected value="1">Lending</option>
-  <option value="2">Borrowing</option>
-  <option value="3">Money Back</option>
-  <option value="4">Pay Back</option>
+  <option ng-repeat="tp in dummySimpleTr.typeArr" ng-selected="{{dummySimpleTr.type==tp.value?true:false}}" value="{{tp.value}}">{{tp.name}}</option>
 </options>
 </select>
 </label>

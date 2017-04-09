@@ -1,7 +1,8 @@
 angular.module('starter.services')
 
 .service('contactService',function(){
-
+  //console.log("contactsService.js");
+  
 
 this.contacts=[];
 this.loadContacts=function()

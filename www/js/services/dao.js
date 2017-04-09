@@ -2,6 +2,8 @@ angular.module('starter.services')
 
 .service('dao',function($ionicPopup){
 
+  //console.log("Dao.js");
+  
   this.today={};
   //Data for stastics
   this.data=[];
@@ -27,7 +29,7 @@ angular.module('starter.services')
       }
       this.groups=[];
       this.getCatList();
-      console.log("level updated"+this.level);
+      //console.log("level updated"+this.level);
       if(this.cateList!=null)
       {
         for (var i=0; i<this.cateList.length; i++) {
@@ -36,8 +38,8 @@ angular.module('starter.services')
             items: []
           };
             items=JSON.parse(localStorage.getItem(this.level+this.groups[i].name));
-      /*      console.log("key "+this.level+this.groups[i].name);
-            console.log("itms "+this.groups[i].items);
+      /*      //console.log("key "+this.level+this.groups[i].name);
+            //console.log("itms "+this.groups[i].items);
             if(this.groups[i].items=null)
             this.groups[i].items=[];*/
             if(items!=null)
@@ -49,7 +51,7 @@ angular.module('starter.services')
         }
       }
       else {
-        console.log("hi");
+        //console.log("hi");
         this.group=[];
       }
 
@@ -88,7 +90,7 @@ angular.module('starter.services')
     var currentLevel=this.levels.length;
     this.levels.push({text:"Level-"+currentLevel});
     localStorage.setItem("levels",angular.toJson(this.levels));
-    console.log(this.levels.length);
+    //console.log(this.levels.length);
   }
   this.addNewCategory=function(name)
   {
@@ -113,14 +115,14 @@ angular.module('starter.services')
       localStorage.setItem(this.level+"-cat",angular.toJson(this.catList));
     }
 
-    console.log("Called");
+    //console.log("Called");
   }
   this.getCatList=function()
   {
-    console.log("2Called");
-    console.log(this.level+"-cat");
+    //console.log("2Called");
+    //console.log(this.level+"-cat");
     cate=JSON.parse(localStorage.getItem(this.level+"-cat"));
-    console.log("cat"+cate);
+    //console.log("cat"+cate);
     if(cate==null)
     {
       this.cateList=[];
@@ -157,33 +159,33 @@ angular.module('starter.services')
    var dd=d.getDate();
    var mm=d.getMonth();
    mm=getMonthTwo(mm);
-   console.log("m:"+mm);0
+   //console.log("m:"+mm);0
    var yy=d.getYear().toString().substr(1,2);
-   //console.log(mm+","+yy);
+   ////console.log(mm+","+yy);
    if(limit=="m")
    {
      for(var i=0;i<this.data.months.length;i++)
      {
-       //console.log(yy);
+       ////console.log(yy);
        var m_key=this.data.months[i]+"_"+yy;
        var keys=JSON.parse(localStorage.getItem(m_key));
-       console.log(keys);
+       //console.log(keys);
        if(keys!=null && keys.hasOwnProperty('length'))
        {
          for(var j=0;j<keys.length;j++)
          {
-//           console.log(j+":"+keys[j]);
+//           //console.log(j+":"+keys[j]);
            var k_data=JSON.parse(localStorage.getItem(keys[j]));
            if(k_data!=null)
            this.data.concat(k_data);
            for(var k=0;k<k_data.length;k++)
            {
-  //           console.log("k:"+k+":"+k_data[k]);
+  //           //console.log("k:"+k+":"+k_data[k]);
              this.data.push(k_data[k]);
            }
          }
        }
-    //   console.log("l:"+this.data);
+    //   //console.log("l:"+this.data);
      }
    }
   }
@@ -209,38 +211,38 @@ angular.module('starter.services')
      {
      this.loadData("m");
        var today=[];
-       //console.log("clalled");
+       ////console.log("clalled");
        var eTemplets=JSON.parse(localStorage.getItem("eTemplets"));
        if(eTemplets==null)
          return [];
 
-         console.log("called");
+         //console.log("called");
        var d=this.date;;
        var dd=d.getDate();
-       console.log("dd:"+dd);
+       //console.log("dd:"+dd);
        var mm=d.getMonth();
        var yy=d.getYear();[{"fr":1,"did":true,"name":"travel","desc":"office","amount":20,"date":"2016-01-24T19:17:55.857Z","$$hashKey":"object:24"},{"did":true,"name":"fg","desc":"gd","amount":2,"$$hashKey":"object:39","date":"2016-01-24T19:17:55.857Z"}]
-       //console.log(eTemplets.length);
+       ////console.log(eTemplets.length);
        for(var i=0;i<eTemplets.length;i++)
        {
-         //console.log("h");
+         ////console.log("h");
          var expItem=eTemplets[i];
-         //console.log(expItem);
+         ////console.log(expItem);
          if(expItem["fr"]==1)
          {
-        //   console.log("one");
+        //   //console.log("one");
            today.push(expItem);
          }
          if(expItem["fr"]==30&&expItem["date"]==dd)
          {
-          // console.log("monthLy");
+          // //console.log("monthLy");
 
            today.push(expItem);
          }
          if(expItem["fr"]!=30&&expItem["fr"]!=1&&expItem["fr"]!=0)
          {
            //To be implemented
-           //console.log("other");
+           ////console.log("other");
 
            today.push(expItem);
          }
@@ -250,19 +252,19 @@ angular.module('starter.services')
        {
          this.showList="";
          this.eNumber=today.length;
-         console.log("LOadign"+today+"length"+today.length);
+         //console.log("LOadign"+today+"length"+today.length);
       }
        return today;
      }
 
      this.today=this.getExpToday();
-console.log("Loading dao");
+//console.log("Loading dao");
    this.account={};
    this.keys=['1212'];
    //this.eTemplets=
    this.getEtemplets=function()
    {
-     //console.log("getEtemp");
+     ////console.log("getEtemp");
      return JSON.parse(localStorage.getItem("eTemplets"));
    }
    this.init=function()
@@ -297,7 +299,7 @@ console.log("Loading dao");
      {
        if(todos[i].did==false)
        {
-    //      console.log("false");
+    //      //console.log("false");
 
        }
        else
@@ -314,7 +316,7 @@ console.log("Loading dao");
        if(keys.indexOf(key)==-1)
          keys.push(key);
        else {
-      //   console.log("already exists");
+      //   //console.log("already exists");
        }
      }
      else {
@@ -335,7 +337,7 @@ console.log("Loading dao");
        if(keys.indexOf(key)==-1)
          keys.push(key);
        else {
-      //   console.log("already exists");
+      //   //console.log("already exists");
        }
      }
      else {
@@ -357,11 +359,11 @@ console.log("Loading dao");
 
 
      }
-     //console.log(todos[0]);
+     ////console.log(todos[0]);
    }
    this.saveThis=function(itm)
    {
-     console.log("I was called");
+     //console.log("I was called");
     var key=getKey(this.date);
      var dt=new Date();
      var tmp=[];
@@ -373,7 +375,7 @@ console.log("Loading dao");
        this.saveToDB(key,oldTodos);
        return;
      }
-        console.log("save");
+        //console.log("save");
         var flag=false;
         if(oldTodos!=null)
         for(var i=0;i<oldTodos.length;i++)

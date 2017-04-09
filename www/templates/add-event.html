@@ -31,7 +31,15 @@
     <br><br>
         <onezone-datepicker datepicker-object="onezoneDatepicker3">
         </onezone-datepicker>
+  <div class="row">
+    <div class="col-xs-10">
+        <button class="button button-icon icon ion-checkmark-circled positive text-center" ng-click="addPayment(Newtr)"></button>
+      </div>
+      <div class="col-xs-2 {{billId!=null?'':'ng-hide'}}">
+          <button class="button button-icon icon ion-close-circled assertive text-center" ng-click="deletePayment(Newtr)"></button>
+        </div>
 
+</div>
  <div class="list">
   <label class="item item-input">
     <input type="text" placeholder="Description" ng-model=bill.desc>
@@ -78,12 +86,6 @@
 </label>
 </div>
 
- <button class="button button-block button-positive " ng-click="addPayment(Newtr)">
-   Add Payment
- </button>
- <button class="button button-block button-positive " ng-click="getContacts()">
-  contacts
- </button>
 
  <div class="list" ng-show="phoneContacts">
    <div class="card" ng-repeat="contact in phoneContacts.phoneContacts">

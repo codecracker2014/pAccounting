@@ -2,6 +2,8 @@ angular.module('starter.controllers')
 
 .controller('userList', function($scope,contactsRepo) {
 
+  //console.log("userList called");
+  
     $scope.addContactFlag="ng-hide";
     $scope.contact={"name":"","mob":""};
     $scope.contacts=contactsRepo.contacts;

@@ -122,20 +122,14 @@
 
 
         </tr>
-<!--        <tr>
-          <td >Total</td>
-          <td >{{currentData.total}}</td>
-          <td ></td>
--->
+      </tbody>
+    </table>
         </div>
 
         <div class="item item-divider {{hideChart}}">
           Expense
-          <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div>
-        </div>
-        <div class="item item-divider {{hideChart}}">
-          Income
-          <div id="chartContainerI" style="height: {{height}}; width: {{width}};"></div>
+          <!-- <div id="chartContainer" style="height: {{height}}; width: {{width}};"></div> -->
+          <canvas id="chartContainer" width="400" height="400"></canvas>
         </div>
 
         <div class="item item-divider {{hideHistogram}}">
@@ -147,6 +141,6 @@ Histogram
         </div>
     </ion-list>
   </div>
-  
+
   </ion-content>
 </ion-view>

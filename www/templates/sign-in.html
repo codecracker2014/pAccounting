@@ -7,6 +7,10 @@
       </ion-nav-bar>
         <ion-content>
           <div class="list">
+            <label class="item item-input {{hideClass}}">
+              {{message}}
+            </label>
+            <div class="item item-input">
             <form name="register" novalidate>
             <label class="item item-input">
               <span class="input-label">name</span>
@@ -20,14 +24,35 @@
               <span class="input-label">Password</span>
               <input type="password" ng-model="user.password" required>
             </label>
+            <label class="item item-input {{hideClass}}">
+              <span class="input-label">OTP</span>
+              <input type="password" ng-model="user.otp" required>
+            </label>
+
           </div>
           <div class="padding">
-            <button class="button button-block button-positive" ng-click="signIn(user)" >
+            <div class="button-bar">
+              <button class="button icon-left ion-log-in button-positive button-outline" ng-click="logInUser(user)" >
+                SignIn
+              </button>
+
+            <button class="button icon-left  ion-person-add  button-positive button-outline" ng-click="signIn(user)" >
               Register
+            </button>
+          </div>
+          <button class="button button-block {{hideClass}} button-positive" ng-click="goToHome()" >
+              Verify Later
             </button>
             <p class="text-center">
             </p>
           </div>
         </form>
+      </div>
+        <div class="card {{hideClass}} ">
+          <div class="item item-text-wrap assertive">
+            App won't be able  to sync any data with other users, unless user is verified!!
+          </div>
+        </div>
+
         </ion-content>
       </ion-view>

@@ -42,37 +42,23 @@ function month_name(i,mode)
   var month_names_short= ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   if(mode==0)
   {
-    console.log(month_names[i]);
+    //console.log(month_names[i]);
     return month_names[i];
   }
   else if (mode==1) {
-    console.log(month_names[i]);
+    //console.log(month_names[i]);
     return month_names_short[i];
   }
 
 }
 
-function createChart(id,cTitle,data) {
-console.log("Creating chart");
- var chart = new CanvasJS.Chart(id,
+function createChart(id,cTitle,data,type) {
+//console.log("Creating chart");
+var ctx = document.getElementById(id);
+ var chart = new Chart(ctx,
  {
-   height: 250, //in pixels
-     width: window.innerWidth-50,
-   title:{
-     text: cTitle
-   },
-   legend: {
-     maxWidth: 350,
-     itemWidth: 120
-   },
-   data: [
-   {
-     type: "pie",
-     showInLegend: true,
-     legendText: "{indexLabel}",
-     dataPoints:data
-   }
-   ]
+   type: type,
+   data:data
  });
  setTimeout(3000);
  chart.render();
@@ -85,17 +71,17 @@ function getKey(d)
   var dd=d.getDate();
   var mm=d.getMonth();
   mm=getMonthTwo(mm);
-  console.log("m:"+mm);
+  //console.log("m:"+mm);
   var yy=d.getYear().toString().substr(1,2);
   var key=dd+mm+yy;
-  console.log(key);
+  //console.log(key);
   return key;
 }
 //60215 280216
 //key1>key2
 function keyEquals(key1,key2)
 {
-//  console.log("key1:"+key1+" key2:"+key2);
+//  //console.log("key1:"+key1+" key2:"+key2);
   var y1=parseInt(getYear(key1));
   var m1=parseInt(getM(key1));
   var d1=parseInt(getD(key1));
@@ -170,15 +156,15 @@ function filterKeys(keys,startDate,endDate)
   var tmp=[];
   var stKey=getKey(startDate);
   var endKey=getKey(endDate);
-//  console.log("keys:"+keys+"stkey "+stKey);
+//  //console.log("keys:"+keys+"stkey "+stKey);
   flag=false;
 
   for(i=0;i<keys.length;i++)
   {
-  //  console.log("keys[i]"+keys[i]+"stKey"+stKey);
+  //  //console.log("keys[i]"+keys[i]+"stKey"+stKey);
     if(keys[i].substr(0,1)=="i")
     {
-      console.log("Found I");
+      //console.log("Found I");
       keys[i]=keys[i].substr(1,keys[i].length-1);
       flag=true;
     }
@@ -186,14 +172,14 @@ function filterKeys(keys,startDate,endDate)
     {
       if(flag==true)
       {
-        console.log("Found I");
+        //console.log("Found I");
         keys[i]="i"+keys[i];
       }
       tmp.push(keys[i]);
     }
   }
 
-  console.log("endKey"+endKey+"Selected:"+tmp);
+  //console.log("endKey"+endKey+"Selected:"+tmp);
   return tmp;
 }
 function generateKeys(startDate,endDate)
@@ -256,4 +242,166 @@ function findContact(contacts,mob)
       return contacts[i];
     }
     return -1;
+}
+function initDate3ForAddEvent($scope,eventsRepo,$ionicSlideBoxDelegate)
+{
+
+  $scope.currentDate3 = eventsRepo.formDate;
+  $scope.onezoneDatepicker3 = {
+  		date: $scope.currentDate3,
+  		mondayFirst: false,
+  		disablePastDays: false,
+  		disableSwipe: false,
+  		disableWeekend: false,
+  		showDatepicker: false,
+  		showTodayButton: true,
+  		calendarMode: false,
+  		hideCancelButton: false,
+  		hideSetButton: false,
+
+  		callback: function(val){
+
+  			//console.log("callback"+val);
+  			eventsRepo.formDate=val;
+  			$ionicSlideBoxDelegate.update();
+  			//console.log("Updated");
+
+  		}
+  };
+
+}
+function inifDate5ForStatus($scope,statusService)
+{
+
+  $scope.currentDate5 = statusService.startDate;
+  $scope.month5=month_name(statusService.startDate.getMonth(),1);
+  //console.log("month1"+$scope.month5);
+
+  //console.log("month5 ds "+statusService.startDate);
+  $scope.onezoneDatepicker5 = {
+  		date: $scope.currentDate5,
+  		mondayFirst: false,
+  		disablePastDays: false,
+  		disableSwipe: false,
+  		disableWeekend: false,
+  		showDatepicker: false,
+  		showTodayButton: true,
+  		calendarMode: false,
+  		hideCancelButton: false,
+  		hideSetButton: false,
+
+  		callback: function(val){
+        //console.log("Start ds "+statusService.startDate);
+  			statusService.startDate=new Date(val.getFullYear(), val.getMonth() , 1);;
+
+  			//console.log('Selected date is : ', val);
+  			$scope.month1=month_name(statusService.startDate.getMonth(),1);
+        var lastDay = new Date(val.getFullYear(), val.getMonth() + 1, 0);
+  			statusService.endDate=lastDay;
+        statusService.refresh();
+  			//console.log(lastDay);
+  		}
+  };
+
+}
+function initDate2ForStatus($scope,statusService)
+{
+  $scope.currentDate2 = statusService.endDate;
+  $scope.month2=month_name(statusService.endDate.getMonth(),1);
+  //console.log("month2"+$scope.month2);
+  //$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
+  //$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
+  $scope.onezoneDatepicker2 = {
+  		date: $scope.currentDate2,
+  		mondayFirst: false,
+  		disablePastDays: false,
+  		disableSwipe: false,
+  		disableWeekend: false,
+  		showDatepicker: false,
+  		showTodayButton: true,
+  		calendarMode: false,
+  		hideCancelButton: false,
+  		hideSetButton: false,
+
+  		callback: function(val){
+
+  			statusService.endDate=val;
+  			statusService.refresh();
+
+  			//console.log('Selected date is : ', val);
+  			$scope.month2=month_name(statusService.endDate.getMonth(),1);
+
+  		}
+  };
+
+}
+function initDateForStatus($scope,statusService)
+{
+
+  	$scope.currentDate1 = statusService.startDate;
+  	$scope.month1=month_name(statusService.startDate.getMonth(),1);
+  	//console.log("sd "+statusService.startDate);
+  	//$scope.minDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 1);
+  	//$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
+
+  	$scope.onezoneDatepicker1 = {
+  	    date: $scope.currentDate1,
+  	    mondayFirst: false,
+  	    disablePastDays: false,
+  	    disableSwipe: false,
+  	    disableWeekend: false,
+  	    showDatepicker: false,
+  	    showTodayButton: true,
+  	    calendarMode: false,
+  	    hideCancelButton: false,
+  	    hideSetButton: false,
+
+  	    callback: function(val){
+
+  				statusService.startDate=val;
+  				statusService.refresh();
+  				//console.log('Selected date is : ', val);
+  				$scope.month1=month_name(statusService.startDate.getMonth(),1);
+
+  	    }
+  	};
+
+}
+function initEntryDates(scope,dao,incomeService,ionicSlideBoxDelegate)
+{
+  scope.currentDate = dao.date;
+  scope.month=month_name(dao.date.getMonth(),1);
+  scope.level=dao.level;
+
+  //console.log("month"+dao.date);
+  scope.onezoneDatepicker = {
+      date: scope.currentDate,
+      mondayFirst: false,
+      disablePastDays: false,
+      disableSwipe: false,
+      disableWeekend: false,
+      showDatepicker: false,
+      showTodayButton: true,
+      calendarMode: false,
+      hideCancelButton: false,
+      hideSetButton: false,
+
+      callback: function(val){
+
+        //console.log("callback"+val);
+        AppDate.dt=val;
+        dao.date=val;
+        dao.refresh();
+        incomeService.refresh();
+        //console.log(dao.today);
+        //console.log(AppDate.getAppDate());
+        //console.log('Selected date is : ', val);
+        scope.month=month_name(dao.date.getMonth(),1);
+
+        ionicSlideBoxDelegate.update();
+        //console.log("Updated");
+
+      }
+  };
+
 }

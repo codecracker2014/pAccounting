@@ -1,7 +1,8 @@
 angular.module('starter.services')
 
 .service('levelService', function(dao,statusService){
-
+  //console.log("LevelService.js");
+  
       this.cList=[];
       this.cItems=[];
       this.cData=[];
@@ -32,38 +33,38 @@ angular.module('starter.services')
       {
         var data={};
         levelNumber=dao.level.substr(6,1);
-        //console.log("#"+levelNumber);
+        ////console.log("#"+levelNumber);
         this.initData();
 
         for(var k=2;k<=levelNumber;k++)
         {
-          //  console.log("L:"+k);
+          //  //console.log("L:"+k);
             var catList=JSON.parse(localStorage.getItem("Level-"+k+"-cat"));
             var lst=[];
-            //console.log("catList"+catList);
+            ////console.log("catList"+catList);
             if(catList!=null)
             {
               for(var i=0;i<catList.length;i++)
               {
                 var subList=JSON.parse(localStorage.getItem("Level-"+k+catList[i]));
-              //console.log("sublist"+subList);
+              ////console.log("sublist"+subList);
                 lst[catList[i]]=0;
                 if(subList!=null)
                 {
                   lst[catList[i]]=0;
                   x=k-1;
-              //console.log("x:"+x);
+              ////console.log("x:"+x);
                   for(var j=0;j<subList.length;j++)
                   {
-                //console.log("lvlD"+this.levelData["Level-"+x]);
-                //console.log("value"+parseInt(this.levelData["Level-"+x].list[subList[j]]));
+                ////console.log("lvlD"+this.levelData["Level-"+x]);
+                ////console.log("value"+parseInt(this.levelData["Level-"+x].list[subList[j]]));
 
                     if(this.levelData["Level-"+x].list[subList[j]]!=null)
                     lst[catList[i]]=parseInt(lst[catList[i]])+parseInt(this.levelData["Level-"+x].list[subList[j]]);
                   }
                 }
-              //console.log(catList[i]+" "+lst[catList[i]]);
-              //console.log("lst:"+lst);
+              ////console.log(catList[i]+" "+lst[catList[i]]);
+              ////console.log("lst:"+lst);
 
               }
             }
@@ -79,7 +80,7 @@ angular.module('starter.services')
       /*  if(levelNumber>1)
         {
           var catList=JSON.parse(localStorage.getItem("Level-"+levelNumber+"-cat"));
-          console.log(statusService.mStatus);
+          //console.log(statusService.mStatus);
           var levelData=[];
           lst=[];
           if(levelNumber==2)
@@ -87,16 +88,16 @@ angular.module('starter.services')
             for(var i=0;i<catList.length;i++)
             {
               var subList=JSON.parse(localStorage.getItem("Level-"+levelNumber+catList[i]));
-              console.log("sublist"+subList);
+              //console.log("sublist"+subList);
               lst[catList[i]]=0;
               for(var j=0;j<subList.length;j++)
               {
-                console.log("value"+parseInt(statusService.mStatus[subList[j]]));
+                //console.log("value"+parseInt(statusService.mStatus[subList[j]]));
                 if(statusService.mStatus[subList[j]]!=null)
                 lst[catList[i]]=parseInt(lst[catList[i]])+parseInt(statusService.mStatus[subList[j]]);
               }
-              console.log(catList[i]+" "+lst[catList[i]]);
-              console.log("lst:"+lst);
+              //console.log(catList[i]+" "+lst[catList[i]]);
+              //console.log("lst:"+lst);
               data.list=lst;
               data.itms=catList;
               data.level=levelNumber;
@@ -104,7 +105,7 @@ angular.module('starter.services')
 
             }
           }
-          console.log(catList);
+          //console.log(catList);
         }*/
       }
       this.refresh=function()

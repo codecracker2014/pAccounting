@@ -1,7 +1,8 @@
 angular.module('starter.services')
 
 .service('incomeService',function(dao){
-
+  //console.log("incomeService.js");
+  
     this.level="Level-2";
     this.incomeList=[];
     this.incomeList.showTable="ng-hide";
@@ -30,7 +31,7 @@ angular.module('starter.services')
     {
         this.loadIncome();
         dt=dao.date.getDate();
-        console.log("Date is"+dt);
+        //console.log("Date is"+dt);
         if(this.incomeList!=null)
         {
           tmp=[];
@@ -58,14 +59,14 @@ angular.module('starter.services')
 
     this.saveIncome=function(income)
     {
-      console.log(income);
+      //console.log(income);
       iTempletes=JSON.parse(localStorage.getItem("iTempletes"));
       if(iTempletes==null)
       {
         iTempletes=[];
         iTempletes.push(income);
         localStorage.setItem("iTempletes",angular.toJson(iTempletes));
-        console.log("First Saved");
+        //console.log("First Saved");
         this.incomeList.showTable="";
       }
       else
@@ -77,13 +78,13 @@ angular.module('starter.services')
 
           if(iTempletes[i].name==income.name)
           {
-            console.log("Edit");
+            //console.log("Edit");
             flag=true;
             tmp.push(income);
           }
           else
           {
-            console.log("Adding to tmp");
+            //console.log("Adding to tmp");
             tmp.push(iTempletes[i]);
           }
         }
@@ -92,14 +93,14 @@ angular.module('starter.services')
           tmp.push(income);
         }
         localStorage.setItem("iTempletes",angular.toJson(tmp));
-        console.log(" Saved"+tmp.length);
+        //console.log(" Saved"+tmp.length);
 
       }
       this.loadIncome();
     }
     this.saveTodayIncome=function(itm)
     {
-      console.log("I was called");
+      //console.log("I was called");
       var key="i"+getKey(dao.date);
       var dt=new Date();
       var tmp=[];
@@ -111,7 +112,7 @@ angular.module('starter.services')
         this.saveToDB(key,oldTodos);
         return;
       }
-         console.log("save");
+         //console.log("save");
          var flag=false;
          if(oldTodos!=null)
          for(var i=0;i<oldTodos.length;i++)
@@ -141,7 +142,7 @@ angular.module('starter.services')
         if(keys.indexOf(key)==-1)
           keys.push(key);
         else {
-       //   console.log("already exists");
+       //   //console.log("already exists");
         }
       }
       else {
@@ -156,11 +157,11 @@ angular.module('starter.services')
 
     this.deleteIncome=function(income)
     {
-      console.log(income);
+      //console.log(income);
       iTempletes=JSON.parse(localStorage.getItem("iTempletes"));
       if(iTempletes==null)
       {
-        console.log("Can't Delete");
+        //console.log("Can't Delete");
       }
       else
       {
@@ -170,18 +171,18 @@ angular.module('starter.services')
 
           if(iTempletes[i].name==income.name)
           {
-            console.log("Edit");
+            //console.log("Edit");
 
 //            tmp.push(income);
           }
           else
           {
-            console.log("Adding to tmp");
+            //console.log("Adding to tmp");
             tmp.push(iTempletes[i]);
           }
         }
         localStorage.setItem("iTempletes",angular.toJson(tmp));
-        console.log(" Saved"+tmp.length);
+        //console.log(" Saved"+tmp.length);
 
       }
       this.loadIncome();

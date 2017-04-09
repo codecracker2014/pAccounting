@@ -1,13 +1,55 @@
 angular.module('starter.services')
 
-.service('simpleTransactionService',function(){
+.service('simpleTransactionService',function(notificationService){
+  //console.log("simpleTransactionService.js");
 
 this.formDate=new Date();
 this.connections=[];
 this.totalR=0;
 this.totalP=0;
+/*
+strCT"+data.mob   = all transaction of user
+strDT= all transactions for perticular day
+ttl= total amount due for user
+ttlList=list of users with due amount
+*/
+
+this.deleteAllForUser=function(mob,keyOfDt)
+{
+    localStorage.removeItem("strCT"+mob);
+  var simpleTrByDate=JSON.parse(localStorage.getItem("strDT"+keyOfDt));
+  if(simpleTrByDate!=null)
+  {
+    var i=simpleTrByDate.indexOf("strCT"+mob);
+    if(i>-1)
+    {
+      simpleTrByDate.splice(i,1);
+      localStorage.setItem("strDT"+keyOfDt,simpleTrByDate);
+    }
+
+  }
+  localStorage.removeItem("ttl"+mob);
+  var totalList=JSON.parse(localStorage.getItem("ttlList"));
+  if(totalList!=null)
+  {
+    var x=totalList.indexOf(mob);
+    if(x>-1)
+    {
+      totalList.splice(x,1);
+      localStorage.setItem("ttlList",angular.toJson(totalList));
+    }
+  }
+}
 this.saveTransaction=function(data)
 {
+      data["ntype"]=1;
+      if(data.isNotf==null || data.isNotf!=true)
+      {
+        var toList=[];
+        toList.push(data.mob);
+        notificationService.pushNotification(data,toList);
+
+      }
       data.date=this.formDate;
       var keyOfDt=getKey(this.formDate);
       var count=JSON.parse(localStorage.getItem("simpleTrTodayCount"));
@@ -103,7 +145,7 @@ this.loadSimpleTrView=function()
            this.connections.push(contact);
        }
      }
-     console.log("total "+this.totalR);
+     //console.log("total "+this.totalR);
 }
 
 this.getTotalByMob=function(mob)

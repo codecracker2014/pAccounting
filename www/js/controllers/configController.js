@@ -4,10 +4,13 @@ angular.module('starter.controllers')
 
   //var tmp=[{fr:1,did:true,name:'travel',desc:'',amount:20,date:''},{fr:1,did:true,name:'lunch',desc:'',amount:40,date:''},{fr:30,did:true,name:'home',desc:'For home',amount:15000,date:'01'}];
   //localStorage.setItem("eTemplets",JSON.stringify(tmp));
+	//console.log("configController.js called");
+
+
 	$scope.level=dao.level;
 	$scope.level1Hide="";
 	$scope.levelHide="ng-hide";
-  console.log("Config called");
+  //console.log("Config called");
 	$scope.exp=dao.getEtemplets();
 	if($scope.exp==null)
 	$scope.exp=[];
@@ -23,7 +26,7 @@ angular.module('starter.controllers')
 	$scope.groups=dao.groups;
 	$scope.toggleGroup = function(group) {
 		if ($scope.isGroupShown(group)) {
-			console.log("11");
+			//console.log("11");
 			$scope.shownGroup = null;
 		} else {
 
@@ -38,7 +41,7 @@ angular.module('starter.controllers')
 	var dummyExp={fr:1,did:true,name:'',desc:'',amount:'',date:''};
   if($scope.exp==null)
   {
-    console.log("1");
+    //console.log("1");
     $scope.exp=[];
 
   }
@@ -51,15 +54,15 @@ angular.module('starter.controllers')
 	$scope.maxDate = new Date($scope.currentDate.getYear(), $scope.currentDate.getMonth(), 30);
 	$scope.datePickerCallback = function (val) {
 		if (!val) {
-			console.log('Date not selected');
+			//console.log('Date not selected');
 		} else {
-			console.log('Selected date is : ', val);ng-disabled="expForm.$invalid"
+			//console.log('Selected date is : ', val);ng-disabled="expForm.$invalid"
 		}
 	};*/
-  console.log($scope.exp);
+  //console.log($scope.exp);
 	$scope.inc=[{fr:30,did:true,name:'salary',desc:'Salary income',amount:33835,date:'01'}];
 	$scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
-  console.log($scope.en);
+  //console.log($scope.en);
   //localStorage.removeItem("eTemplets");
 	$scope.save=function()
 	{
@@ -67,11 +70,11 @@ angular.module('starter.controllers')
 		if($scope.state=="n")
 		{
 		$scope.exp.push($scope.en);
-    console.log("my en");
-    console.log($scope.en);
+    //console.log("my en");
+    //console.log($scope.en);
     //localStorage.removeItem("eTemplets");
     localStorage.setItem("eTemplets",JSON.stringify($scope.exp));
-		console.log(JSON.parse(localStorage.getItem("eTemplets")));
+		//console.log(JSON.parse(localStorage.getItem("eTemplets")));
 		//$scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
     dao.refresh();
     $scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
@@ -79,13 +82,13 @@ angular.module('starter.controllers')
 		}
 		else
 		{
-			console.log("Update");
+			//console.log("Update");
 			var i=0;
 			for(i=0;i<$scope.exp.length;i++)
 			{
 				if($scope.exp[i].name==$scope.en.name)
 				{
-					console.log("found");
+					//console.log("found");
 					$scope.exp[i]=$scope.en;
 					break;
 				}
@@ -120,20 +123,20 @@ angular.module('starter.controllers')
 	}
 	$scope.delete=function()
 	{
-		console.log("Delete en");
+		//console.log("Delete en");
 		var i=0;
-		console.log($scope.en);
+		//console.log($scope.en);
 		for(i=0;i<$scope.exp.length;i++)
 		{
-			console.log($scope.exp);
+			//console.log($scope.exp);
 			if($scope.exp[i].name==$scope.en.name)
 			{
-				console.log("found to delete");
+				//console.log("found to delete");
 				$scope.exp.splice(i, 1);
 				break;
 			}
 		}
-		console.log($scope.exp);
+		//console.log($scope.exp);
 		localStorage.setItem("eTemplets",JSON.stringify($scope.exp));
 		dao.refresh();
 		$scope.en={fr:1,did:true,name:'',desc:'',amount:'',date:''};
@@ -161,7 +164,7 @@ angular.module('starter.controllers')
 		 titleText: 'Levels',
 		 cancelText: 'Cancel',
 		 cancel: function() {
-					console.log("I was called");
+					//console.log("I was called");
 				},
 		 buttonClicked: function(index) {
 
@@ -217,11 +220,11 @@ $scope.showPopup=function()
         type: 'button-positive',
         onTap: function(e) {
           if ($scope.catAdd.name==null) {
-//						console.log("me"+$scope.catAdd.name);
+//						//console.log("me"+$scope.catAdd.name);
 			      //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {
-	//					console.log($scope.catAdd.name);
+	//					//console.log($scope.catAdd.name);
 						dao.addNewCategory($scope.catAdd.name);
 						dao.refresh();
 						$scope.cateList=dao.getCatList();
@@ -238,9 +241,9 @@ $scope.showPopup=function()
 $scope.showSelect=function(name)
 {
 	$scope.list=[];
-  console.log("name"+name);
+  //console.log("name"+name);
 	$scope.list=service.getExpList();
-	console.log($scope.list);
+	//console.log($scope.list);
 	$scope.listData={};
 	$scope.listData.name=name;
 	var myPopup = $ionicPopup.show({
@@ -256,11 +259,11 @@ $scope.showSelect=function(name)
         type: 'button-positive',
         onTap: function(e) {
           if ($scope.listData.selected==null) {
-//						console.log("me"+$scope.catAdd.name);
+//						//console.log("me"+$scope.catAdd.name);
 			      //don't allow the user to close unless he enters wifi password
             e.preventDefault();
           } else {
-	//					console.log($scope.catAdd.name);
+	//					//console.log($scope.catAdd.name);
 						dao.addNewExp($scope.listData.name,$scope.listData.selected);
 						dao.refresh();
 						$scope.cateList=dao.getCatList();

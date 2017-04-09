@@ -1,7 +1,8 @@
 angular.module('starter.services')
 
 .service('eventsRepo',function($cordovaContacts){
-
+  //console.log("eventsRepoService.js");
+  
 
 this.contacts=[];
 this.formDate=new Date();

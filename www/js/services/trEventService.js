@@ -1,30 +1,64 @@
 angular.module('starter.services')
 
-.service('trEventService',function(eventsRepo,simpleTransactionService){
+.service('trEventService',function(eventsRepo,simpleTransactionService,$state){
+  //console.log("trEventService.js");
+  
 
-
-this.saveBill=function(bill)
+this.deleteBill=function(billId)
 {
-  console.log("Saving bill " +bill.payers[0].mob);
-  bill.date=eventsRepo.formDate;
-  var keyOfDt=getKey(bill.date);
-  var billsKey="bills"+keyOfDt;
-  var billToday=JSON.parse(localStorage.getItem(billsKey));
-  var i=0;
-  if(billToday!=null)
+  var bill=JSON.parse(localStorage.getItem(billId));
+  var billsKey=this.getBillsKey(new Date(bill.date));
+  var billToday=this.getBillToday(billsKey);
+  var i=billToday.indexOf(billId);
+  if(i>-1)
   {
-    i=billToday.length;
+    billToday.splice(i, 1);
+  }
+  localStorage.setItem(billsKey,angular.toJson(billToday));
+  localStorage.removeItem(billId);
+  var keyOfDt=getKey(new Date(bill.date));
+  simpleTransactionService.deleteAllForUser(billId,keyOfDt);
+  alert("Bill deleted");
+  $state.go('tab.planning');
+}
+this.getBillsKey=function(date)
+{
+  var keyOfDt=getKey(date);
+  var billsKey="bills"+keyOfDt;
+    return billsKey;
+}
+this.getBillToday= function(billsKey)
+{
+  return JSON.parse(localStorage.getItem(billsKey));
+}
+this.saveBill=function(bill,billId)
+{
+  var billKey="";
+  bill.date=eventsRepo.formDate;
+  if(billId!=null && billId != "")
+  {
+    billKey=billId;
   }
   else {
-    billToday=[];
+    var billsKey=this.getBillsKey(bill.date);
+    var billToday=this.getBillToday(billsKey);
+    var i=0;
+    if(billToday!=null)
+    {
+      i=billToday.length;
+    }
+    else {
+      billToday=[];
+    }
+    billKey=billsKey+"i"+i;
+    billToday.push(billKey);
+    localStorage.setItem(billsKey,angular.toJson(billToday));
   }
-  var billKey=billsKey+"i"+i;
   this.saveTrFromBill(bill,billKey);
-  billToday.push(billKey);
   localStorage.setItem(billKey,angular.toJson(bill));
-  localStorage.setItem(billsKey,angular.toJson(billToday));
-  console.log("BILL "+keyOfDt);
-  //this.saveTrFromBill(bill,billKey);
+  alert("Bill saved");
+  simpleTransactionService.loadSimpleTrView();
+  $state.go('tab.planning');
 }
 
 this.saveTrFromBill=function(bill,billKey)
@@ -61,9 +95,8 @@ this.saveTrFromBill=function(bill,billKey)
   }
   data.amount=amount;
   data.desc=bill.desc;
-  data.name="bill";
+  data.name=(bill.desc!=null && bill.desc!=""?bill.desc:"Bill")+(bill.place!=null && bill.place!=""?" bill @ "+bill.place:"");
   data.mob=billKey;
   simpleTransactionService.saveTransaction(data);
-
 }
 })

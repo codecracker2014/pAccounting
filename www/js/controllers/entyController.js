@@ -1,37 +1,20 @@
 angular.module('starter.controllers')
 
-.controller('activeTodoController', function($scope,dao,statusService,levelService,incomeService,$ionicSideMenuDelegate,$cordovaFile) {
+.controller('activeTodoController', function($scope,dao,statusService,notificationService,levelService,incomeService,$ionicSideMenuDelegate,$ionicSlideBoxDelegate,$cordovaFile,$state) {
   //dao.getExpToday();
+	//console.log("activeTodoController from entryController.js called");
+	var notifivations=notificationService.getSavedNotifications();
+	if(notifivations!=null)
+	{
+		$scope.notificationsCount=notifivations.length;
+	}
+	console.log("ctrl ca;;");
+
+	initEntryDates($scope,dao,incomeService,$ionicSlideBoxDelegate,$state);
 	var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
-	//pdfMake.createPdf(docDefinition).open();
-	console.log("file plugin "+$cordovaFile);
-// 	document.addEventListener('deviceready', function () {
-//
-// 		$cordovaFile.createDir(cordova.file.externalRootDirectory, "pAccounting", false)
-//        .then(function (success) {
-//          console.log("created dir");
-//        }, function (error) {
-//          console.log("err created dir");
-//        });
-//
-// 			 pdfMake.createPdf(docDefinition).getBuffer(function (buffer) {
-// 			     var utf8 = new Uint8Array(buffer); // Convert to UTF-8...
-// 			     binaryArray = utf8.buffer; // Convert to Binary...
-// 					 $cordovaFile.writeFile(cordova.file.externalRootDirectory, "pAccounting/example.pdf", binaryArray, true)
-// 					 		 .then(function (success) {
-// 					 			 alert("Done");
-// 					 		 }, function (error) {
-// 					 			 console.log("err");
-// 					 		 });
-// 			 });
-//
-//
-//
-//
-//
-// });
+	//console.log("file plugin "+$cordovaFile);
 	$scope.user=JSON.parse(localStorage.getItem("user"));
-	console.log("Controller Init");
+	//console.log("Controller Init");
 	$scope.todos=dao;//.getExpToday();//[{did:true,name:'travel',desc:'went to office',amount:20},{did:false,name:'lunch',desc:'office lunch',amount:40}];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
@@ -43,42 +26,40 @@ angular.module('starter.controllers')
 	incomeService.loadIncomeToday();
 	$scope.incomeList=incomeService.todayIncome;
   $scope.inputType={'type':"Expense"};//1==expense && 0= input
-	console.log(dao.savedExpense);
-	console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
-	//console.log("saved:"+$scope.saved);
-
+	//console.log(dao.savedExpense);
+	//console.log("Height"+window.innerHeight+",width:"+window.innerWidth);
   $scope.saveTodos=function()
 	{
 
-     console.log("hh");
-     console.log($scope.addN);
+     //console.log("hh");
+     //console.log($scope.addN);
      for(var i=0;i<$scope.addN.length;i++)
      {
-       console.log($scope.addN[i]);
+       //console.log($scope.addN[i]);
           $scope.todos.today.push($scope.addN[i]);
      }
       //$scope.todos.concat($scope.addN);
 
-    console.log("Los");
-/*    console.log($scope.todos.today);
+    //console.log("Los");
+/*    //console.log($scope.todos.today);
 		var arr=[];
 		for(var i=0;i<$scope.todos.today.length;i++)
 		{
 				if($scope.todos.today[i].did=="true")
 				arr.push($scope.todos.today[i]);
 		}
-		console.log(arr);*/
+		//console.log(arr);*/
 		dao.save($scope.todos.today);
 		statusService.refresh();
 		//levelService.refresh();
-    console.log("no");
+    //console.log("no");
   //  $scope.addN=[];
 
 	}
 	$scope.saveThis=function(itm)
 	{
 
-				console.log("Kalled");
+				//console.log("Kalled");
 					dao.saveThis(itm);
 					statusService.refresh();
 	}
@@ -87,7 +68,7 @@ angular.module('starter.controllers')
  	{
 		//$scope.openModal();showList
 		$scope.showList="ng-hide";
-		console.log("i was callred");
+		//console.log("i was callred");
      dao.addN={did:true,name:'',desc:'',amount:0};
 }
 	$scope.saveThisNew=function(itm)
@@ -122,14 +103,14 @@ angular.module('starter.controllers')
  //Income
  $scope.saveTodayIncome=function(income)
  {
-	 console.log("saveTodayIncome");
+	 //console.log("saveTodayIncome");
 	 incomeService.saveTodayIncome(income);
 	 statusService.refresh();
  }
 
 $scope.update=function(itm,type)
 {
-	console.log("Updating");
+	//console.log("Updating");
 	$scope.inputType.type=type;
 	dao.addN=itm;
 }
@@ -179,11 +160,16 @@ function(newVal){
 	$scope.showListE=newVal;
 });
 
-console.log("Controller End");
+//console.log("Controller End");
 $scope.toggleLeft = function() {
 	 $ionicSideMenuDelegate.toggleLeft();
-	 console.log("called12");
+	 //console.log("called12");
 };
+
+$scope.openNotifications=function()
+{
+  $state.go("tab.list-notifications");
+}
 })
 .filter('sumOfValue', function () {
  return function (data, key) {

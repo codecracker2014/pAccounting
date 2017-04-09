@@ -1,8 +1,12 @@
 angular.module('starter.controllers')
 
-.controller('addEventController', function($scope,$ionicPopup,contactService,trEventService,$cordovaSQLite,$cordovaContacts,eventsRepo,contactsRepo,$timeout) {
+.controller('addEventController', function($scope,$ionicPopup,contactService,trEventService,$cordovaSQLite,$cordovaContacts,eventsRepo,contactsRepo,$timeout,$stateParams,$ionicSlideBoxDelegate) {
 
-
+  //console.log("addEventController called");
+  
+initDate3ForAddEvent($scope,eventsRepo,$ionicSlideBoxDelegate);
+$scope.billId=null;
+$scope.billId=$stateParams.billId;
 $scope.payersAmountVo={totalAmount:0,sumStrategy:true,partition:0,defaultTotal:false};
 $scope.phoneContacts=contactsRepo;
 $scope.choice={"payer":true,"partner":true};
@@ -16,12 +20,24 @@ $scope.showError=false;
 $scope.user=JSON.parse(localStorage.getItem("user"));
 var timeoutVal=2000;
 $scope.bill={desc:'',place:'',date:'',payers:[],partners:[],totalAmount:0};
+
+
+if($scope.billId!='')
+{
+  var bill=JSON.parse(localStorage.getItem($scope.billId));
+  $scope.payersList=bill.payers;
+  $scope.partnersList=bill.partners;
+  $scope.bill=bill;
+  eventsRepo.formDate=new Date(bill.date);
+
+
+}
 $scope.selectPayers=function()
 {
   if($scope.payersAmountVo.totalAmount!=0&&$scope.payersAmountVo.defaultTotal==false)
   {
     $scope.payersAmountVo.defaultTotal=true;
-    console.log("New STrategy"+$scope.payersAmountVo.sumStrategy);
+    //console.log("New STrategy"+$scope.payersAmountVo.sumStrategy);
   }
   $scope.list=[];
 	$scope.list=contactService.contacts;
@@ -72,16 +88,16 @@ $scope.selectPayers=function()
             $scope.selectError.flag=false;
             var selected=JSON.parse($scope.listData.selected);
             var selectedPartner=JSON.parse(JSON.stringify(selected));
-            console.log("Selected "+selected.mob);
+            //console.log("Selected "+selected.mob);
             if($scope.uType.payer==true)
             {
               if($scope.choice.payer==true)
               {
-                console.log("adding payer");
+                //console.log("adding payer");
                   var newAmount=$scope.bill.totalAmount/($scope.payersList.length+1);
                   selected.amount=0;
                   $scope.payersList.push(selected);
-                  console.log("newAmount"+newAmount);
+                  //console.log("newAmount"+newAmount);
                   for(var i=0;i<$scope.payersList.length;i++)
                   {
                     $scope.payersList[i]["amount"]=newAmount;
@@ -96,7 +112,7 @@ $scope.selectPayers=function()
             }
             if($scope.uType.partner==true)
             {
-              console.log("adding partner");
+              //console.log("adding partner");
 
               if($scope.choice.partner==true)
               {
@@ -123,6 +139,11 @@ $scope.selectPayers=function()
   });
 }
 
+$scope.deletePayment=function(payment)
+{
+
+  trEventService.deleteBill($scope.billId);
+}
 
 $scope.addPayment=function(payment)
 {
@@ -156,8 +177,7 @@ $scope.addPayment=function(payment)
 
   $scope.bill.payers=$scope.payersList;
   $scope.bill.partners=$scope.partnersList;
-
-  trEventService.saveBill($scope.bill);
+  trEventService.saveBill($scope.bill,$scope.billId);
 
 
 };
@@ -170,7 +190,7 @@ var hideErrorMessage=function()
 $scope.getTotalAmount=function  (itemList)
 {
 
-   console.log("..");
+   //console.log("..");
    var x=0;
    var flag=false;
    for(var i=0;i<itemList.length;i++)

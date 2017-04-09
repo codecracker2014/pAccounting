@@ -1,6 +1,12 @@
 angular.module('starter.controllers')
 
 .controller('statusController', function($scope,dao,statusService,$ionicActionSheet,$timeout,levelService,incomeService) {
+
+  //console.log("configController called");
+  
+  initDateForStatus($scope,statusService);
+  initDate2ForStatus($scope,statusService);
+  inifDate5ForStatus($scope,statusService);
   $scope.todos=[];
   $scope.todos.date=new Date();
   $scope.todos.getM=getMonthName($scope.todos.date.getMonth());
@@ -16,7 +22,7 @@ angular.module('starter.controllers')
 	$scope.hideHistogram="ng-hide";
   $scope.leve1Hide="";
   $scope.levelHide="ng-hide";
-  console.log("Status dd "+statusService.startDate);
+  //console.log("Status dd "+statusService.startDate);
 
 	$scope.show = function() {
 
@@ -25,15 +31,15 @@ angular.module('starter.controllers')
      buttons: [
        { text: 'Totals' },
        { text: 'Pie Chart' },
-			 { text: 'Histogram' }
+			//  { text: 'Histogram' }
      ],
      titleText: 'Stastics',
      cancelText: 'Cancel',
      cancel: function() {
-          console.log("I was called");
+          //console.log("I was called");
         },
      buttonClicked: function(index) {
-			 console.log("index"+index);
+			 //console.log("index"+index);
 			 if(index==0)
 			 {
 				 $scope.hideChart="ng-hide";
@@ -42,6 +48,7 @@ angular.module('starter.controllers')
 			 }
 			 else if(index==1)
 			 {
+         //statusService.createPieChart();
 				 $scope.hideHistogram="ng-hide";
 				 $scope.hideChart="";
 				 $scope.hideTotals="ng-hide";
@@ -66,14 +73,14 @@ angular.module('starter.controllers')
 
 $scope.showLevel=function()
 {
-	console.log("dl");
+	//console.log("dl");
 	levels=dao.getLevels();
 	var hideSheet = $ionicActionSheet.show({
 		buttons: levels,
 		titleText: 'Levels',
 		cancelText: 'Cancel',
 		cancel: function() {
-				 console.log("I was called");
+				 //console.log("I was called");
 			 },
 		buttonClicked: function(index) {
 

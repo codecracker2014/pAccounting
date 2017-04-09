@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.myapp425879" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.codecracker.paccounting" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>pAccounting</name>
   <description>
         Personal finance management app
@@ -9,6 +9,8 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access origin="http://pa-gajendra.rhcloud.com/*"/>
+  <allow-navigation href="http://pa-gajendra.rhcloud.com/*" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

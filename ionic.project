@@ -4,11 +4,31 @@
 "proxies": [
     {
       "path": "/register",
-      "proxyUrl": "http://localhost:8080/paccounting/register"
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/user/register/"
     },
   {
-      "path": "/getnot",
-      "proxyUrl": "http://localhost:8080/paccounting/getnot"
+      "path": "/auth",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/"
+    },
+  {
+      "path": "/verify",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/user/verify/"
+    },
+  {
+      "path": "/getToken",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/user/getToken/"
+    },
+  {
+      "path": "/getNotification/9950607306",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/notification/getNotification/9950607306"
+    },
+  {
+      "path": "/getNotification/7791897645",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/notification/getNotification/7791897645"
+    },
+  {
+      "path": "/push",
+      "proxyUrl": "http://pa-gajendra.rhcloud.com/auth/notification/push"
     }
   ]
 }

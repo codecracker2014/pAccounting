@@ -1,7 +1,8 @@
 angular.module('starter.services')
 
 .service('contactsRepo',function($cordovaContacts){
-
+  //console.log("contactsRepo.js");
+  
 
 this.contacts=[];
 this.contacts.refresh=false;

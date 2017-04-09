@@ -1,6 +1,8 @@
 angular.module('starter.services')
 
 .service('statusService', function(dao){
+	//console.log("status.js");
+  
 		this.items=[];
 		this.itemsI=[];
     this.dataPoints=[];
@@ -16,17 +18,17 @@ angular.module('starter.services')
     this.startDate=new Date();
     this.startDate.setDate(1);
     this.endDate=new Date();
-
+		this.st=[];
 		this.monthlyStatus=function()
 		{
 			var st=[];
 
-//      console.log("st"+st);
+//      //console.log("st"+st);
 			var keys=JSON.parse(localStorage.getItem("keys"));
 			if(keys!=null)
 			{
 				keys=generateKeys(this.startDate,this.endDate);
-				console.log(keys);
+				//console.log(keys);
 			}
 			else {
 				return;
@@ -38,7 +40,7 @@ angular.module('starter.services')
 				var logs=JSON.parse(localStorage.getItem(keys[i]));
         if(logs==null)
 				    continue;
-        console.log(logs+" , "+keys[i]);
+        //console.log(logs+" , "+keys[i]);
 				for(var j=0;j<logs.length;j++)
 				{
           if(this.items.indexOf(logs[j].name)==-1)
@@ -57,27 +59,50 @@ angular.module('starter.services')
           }
 				}
 			}
+			this.st=st;
       for(var i=0;i<this.items.length;i++)
       {
             var obj={};
-//            console.log(this.items[i]);
+//            //console.log(this.items[i]);
           this.dataPoints.push({y:st[this.items[i]],indexLabel:this.items[i]});
       }
 			this.width="300px";idth="300px";
       this.height="100%";
-      console.log("points"+this.dataPoints);
-			
-      createChart("chartContainer","Expense chart",this.dataPoints);
-      this.width="300px";
-      this.height="100%";
 			this.mStatus= st;
 			dao.itmList=this.items;
+			this.createPieChart();
+		}
+
+		this.createPieChart=function()
+		{
+			var data={};
+			data["labels"]=[];
+			data["datasets"]=[];
+			var data1={};
+			var inputData=[];
+			data1["data"]=inputData;
+			var backgroundColor=[];
+
+			for(var i=0;i<this.items.length;i++)
+      {
+						data.labels.push(this.items[i]);
+						inputData.push(parseInt(this.st[this.items[i]]));
+						backgroundColor.push("#"+((1<<24)*Math.random()|0).toString(16));
+      }
+
+			data1["backgroundColor"]=backgroundColor;
+			data["datasets"].push(data1);
+			this.width="300px";idth="300px";
+      this.height="100%";
+      createChart("chartContainer","Expense chart",data,'pie');
+			//createChart("chartContainerI","Expense chart",data,'pie');
+
 		}
 		this.monthlyStatusI=function()
 		{
 						var st=[];
 
-			//      console.log("st"+st);
+			//      //console.log("st"+st);
 						var keys=JSON.parse(localStorage.getItem("ikeys"));
 						if(keys!=null)
 			      keys=generateKeys(this.startDate,this.endDate);
@@ -113,14 +138,14 @@ angular.module('starter.services')
 			      for(var i=0;i<this.itemsI.length;i++)
 			      {
 			            var obj={};
-			//            console.log(this.items[i]);
+			//            //console.log(this.items[i]);
 			          this.dataPointsI.push({y:st[this.itemsI[i]],indexLabel:this.itemsI[i]});
 			      }
 
       this.width="300px";
       this.height="100%";
-      console.log("points"+this.dataPointsI);
-      createChart("chartContainerI","Income chart",this.dataPointsI);
+      //console.log("points"+this.dataPointsI);
+      createChart("chartContainerI","Income chart",this.dataPointsI,"bar");
       this.width="300px";
       this.height="100%";
 			this.mStatusI= st;
@@ -128,7 +153,7 @@ angular.module('starter.services')
     }
     this.refresh=function()
     {
-      console.log("Refreshing");
+      //console.log("Refreshing");
       this.items=[];
       this.dataPoints=[];
       this.mStatus=[];
@@ -142,7 +167,7 @@ angular.module('starter.services')
 
     }
       dao.loadSaved();
-      console.log("p:"+this.dataPoints);
+      //console.log("p:"+this.dataPoints);
     //  createChart("Expense chart",this.dataPoints);
     }
 });

@@ -4,7 +4,12 @@
   <ion-nav-back-button>
   </ion-nav-back-button>
 </ion-nav-bar>
-  <ion-content class="padding">
+  <ion-content class="padding {{message==''?ng-hide:''}}">
+    <div class="card">
+      <div class="item item-text-wrap">
+        {{message}}
+      </div>
+  </div>
     <button class="button button-full button-positive" ng-click="exportData()">
 Export Data
     </button>

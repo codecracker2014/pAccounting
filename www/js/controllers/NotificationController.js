@@ -2,6 +2,8 @@ angular.module('starter.controllers')
 
 .controller('NotificationController',function ($scope,$cordovaLocalNotification, $ionicPlatform,$rootScope) {
 
+  //console.log("NotificationCOntroller called");
+  
     $ionicPlatform.ready(function () {
 
 
@@ -29,7 +31,7 @@ angular.module('starter.controllers')
             text: 'Im so late',
             at: _10SecondsFromNow
           }).then(function (result) {
-            console.log('Notification 2 triggered');
+            //console.log('Notification 2 triggered');
           });
         };
 
@@ -40,7 +42,7 @@ angular.module('starter.controllers')
             text: 'Dont fall asleep',
             every: 'minute'
           }).then(function (result) {
-            console.log('Notification 3 triggered');
+            //console.log('Notification 3 triggered');
           });
         };
 
@@ -50,13 +52,13 @@ angular.module('starter.controllers')
             title: 'Warning Update',
             text: 'This is updated text!'
           }).then(function (result) {
-            console.log('Notification 1 Updated');
+            //console.log('Notification 1 Updated');
           });
         };
 
         $scope.cancelSingleNotification = function () {
           $cordovaLocalNotification.cancel(3).then(function (result) {
-            console.log('Notification 3 Canceled');
+            //console.log('Notification 3 Canceled');
           });
         };
 
